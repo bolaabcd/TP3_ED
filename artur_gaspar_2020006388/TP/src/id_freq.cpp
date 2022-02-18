@@ -8,15 +8,7 @@
 
 ID_Freq::ID_Freq(int id, int freq) : id(id), freq(freq){};
 
-int ID_Freq::get_id()
-{
-    return this->id;
-}
-
-int ID_Freq::get_freq()
-{
-    return this->freq;
-}
+ID_Freq::ID_Freq() {}
 
 bool ID_Freq::operator<(ID_Freq &outro)
 {

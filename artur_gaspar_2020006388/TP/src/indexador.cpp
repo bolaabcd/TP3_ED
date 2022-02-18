@@ -41,6 +41,8 @@ void Indexador::cria_indice(Indice_Termos &ans)
         strstream << dir_entry;
         ans.add_documento(this->corpus, stri, this->stopw);
     }
+
+    ans.ordena_tudo();
 }
 
 void Indexador::arq_pra_set(std::string caminho, String_Set &ans, String_Set &proibidos)

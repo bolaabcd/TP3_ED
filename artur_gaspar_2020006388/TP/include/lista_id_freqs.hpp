@@ -23,8 +23,15 @@ class Lista_ID_Freqs
 {
 public:
     Lista_ID_Freqs();
-    ID_Freq_Node* get_front();
-    void add_in_order(ID_Freq id_freq);
+    ID_Freq_Node *get_front();
+    void add(ID_Freq id_freq);
+    void ordena();
+    ~Lista_ID_Freqs();
+
+private:
+    ID_Freq_Node *no_frontal;
+    int tamanho;
+    void quicksort_interno(int l, int r, ID_Freq *lista);
 };
 
 #endif

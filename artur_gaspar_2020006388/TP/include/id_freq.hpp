@@ -11,13 +11,10 @@ class ID_Freq
 {
 public:
     ID_Freq(int id, int freq);
-    int get_id();
-    int get_freq();
-    bool operator<(ID_Freq &outro);
-
-private:
+    ID_Freq();
     int id;
     int freq;
+    bool operator<(ID_Freq &outro);
 };
 
 #endif

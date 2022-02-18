@@ -42,6 +42,12 @@ void Indice_Termos::add_documento(
     }
 }
 
+void Indice_Termos::ordena_tudo()
+{
+    for (int i = 0; i < this->tamanho_atual; i++)
+        this->mapa[i].ordena_tudo();
+}
+
 void Indice_Termos::make_primos()
 {
     // Gerado externamente
