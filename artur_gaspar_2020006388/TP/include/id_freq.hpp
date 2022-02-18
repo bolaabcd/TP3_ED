@@ -14,6 +14,10 @@ public:
     int get_id();
     int get_freq();
     bool operator<(ID_Freq &outro);
+
+private:
+    int id;
+    int freq;
 };
 
 #endif
