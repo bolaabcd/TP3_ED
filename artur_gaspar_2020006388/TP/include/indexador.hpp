@@ -15,10 +15,15 @@ class Indexador
 {
 public:
     Indexador();
-    Indice_Termos cria_indice(std::string corpus_path, std::string stopwords_path);
+    void cria_indice(
+        std::string corpus_path,
+        std::string stopwords_path,
+        Indice_Termos &indice);
 
 private:
-    Stopwords_Set pega_stopwords();
+    void pega_stopwords(std::string stopwords_path, Stopwords_Set &ans);
+    void limpa_pontuacao(std::string &palavra);
+    void to_lowercase(std::string &palavra);
 };
 
 #endif

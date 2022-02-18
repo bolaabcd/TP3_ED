@@ -1,5 +1,5 @@
 //---------------------------------------------------------------------
-// Arquivo      : id_freq.hpp
+// Arquivo      : id_freq.cpp
 // Conteudo     : arquivo de implementacao para par ID-Frequencia de aparicao.
 // Autor        : Artur Gaspar da Silva
 //---------------------------------------------------------------------

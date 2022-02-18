@@ -128,7 +128,8 @@ int main(int argc, char **argv)
 
     Indexador ind;
 
-    Indice_Termos iter = ind.cria_indice(corpus_nome,stop_nome);
+    Indice_Termos iter(String_Hasher(), 16);
+    ind.cria_indice(corpus_nome, stop_nome, iter);
 
     Processador_Consultas pcs;
 
