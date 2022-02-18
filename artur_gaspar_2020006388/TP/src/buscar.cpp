@@ -9,6 +9,9 @@
 #include <string>
 #include "memlog.hpp"
 #include "msgassert.hpp"
+#include "indexador.hpp"
+#include "processador_consultas.hpp"
+#include "ranking_documentos.hpp"
 
 // variaveis globais para opcoes
 std::string reg_nome, querry_nome, out_nome, corpus_nome, stop_nome;
@@ -123,7 +126,15 @@ int main(int argc, char **argv)
     // ativar registro de acesso
     ativaMemLog();
 
-    // codigo aqui
+    Indexador ind;
+
+    Indice_Termos iter = ind.cria_indice(corpus_nome,stop_nome);
+
+    Processador_Consultas pcs;
+
+    Ranking_Documentos ran = pcs.consultar(iter, querry_nome, 10);
+
+    ran.imprimir(out_nome);
 
     // conclui registro de acesso
     return finalizaMemLog();

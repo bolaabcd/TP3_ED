@@ -7,15 +7,18 @@
 #ifndef INDEXADOR_DOCUMENTOS
 #define INDEXADOR_DOCUMENTOS
 
-#include <fstream>
+#include <string>
 #include "stopwords_set.hpp"
 #include "indice_termos.hpp"
 
 class Indexador
 {
 public:
-    Indexador(Stopwords_Set stopwords);
-    Indice_Termos cria_indice(std::ifstream corpus);
+    Indexador();
+    Indice_Termos cria_indice(std::string corpus_path, std::string stopwords_path);
+
+private:
+    Stopwords_Set pega_stopwords();
 };
 
 #endif
