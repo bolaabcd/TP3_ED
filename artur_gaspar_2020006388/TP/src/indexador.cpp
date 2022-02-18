@@ -10,11 +10,12 @@
 #include <filesystem>
 #include <string>
 
-Indexador::Indexador(std::string corpus_path, std::string stopwords_path){
+Indexador::Indexador(std::string corpus_path, std::string stopwords_path)
+{
     this->corpus = corpus_path;
     this->stopwords = stopwords_path;
     String_Set vazio;
-    arq_pra_set(stopwords_path,this->stopw,vazio);
+    arq_pra_set(stopwords_path, this->stopw, vazio);
     std::filesystem::path caminho(corpus_path);
 
     for (const std::filesystem::directory_entry &dir_entry :
@@ -23,7 +24,7 @@ Indexador::Indexador(std::string corpus_path, std::string stopwords_path){
         std::string stri;
         std::stringstream strstream(stri);
         strstream << dir_entry;
-        arq_pra_set(corpus_path+"/"+ stri, this->termos, this->stopw);
+        arq_pra_set(corpus_path + "/" + stri, this->termos, this->stopw);
     }
 }
 
@@ -50,12 +51,13 @@ void Indexador::arq_pra_set(std::string caminho, String_Set &ans, String_Set &pr
     {
         Leitor_Termos lei(caminho, &proibidos);
         std::string palavra = lei.ler();
-        if(!lei.ok())
+        if (!lei.ok())
             break;
         ans.add(palavra);
     }
 }
 
-int Indexador::quantos_termos(std::string corpus_path) {
+int Indexador::quantos_termos(std::string corpus_path)
+{
     return this->termos.size();
 }

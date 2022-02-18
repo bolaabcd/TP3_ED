@@ -17,17 +17,16 @@ class Indice_Termos
 {
 public:
     Indice_Termos(String_Hasher hasher, int tamanho_inicial);
-    Lista_ID_Freqs& get_lista_id_freqs(std::string termo);
+    Lista_ID_Freqs &get_lista_id_freqs(std::string termo);
     void Indice_Termos::add_documento(
         std::string corpus,
         std::string documento,
-        String_Set &stopw
-    );
+        String_Set &stopw);
 
 private:
     String_Hasher hasher;
-    Lista_Lista_ID_Freqs* mapa;
-    int* tamanhos_primos_validos;
+    Lista_Lista_ID_Freqs *mapa;
+    int *tamanhos_primos_validos;
     int tamanho_atual;
     int get_next_tamanho(int tam);
     int getiddoc(std::string nome);

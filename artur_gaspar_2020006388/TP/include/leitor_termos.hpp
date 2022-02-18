@@ -10,16 +10,20 @@
 #include <string>
 #include <fstream>
 #include <iostream>
+#include "string_set.hpp"
 
 class Leitor_Termos
 {
 public:
-    Leitor_Termos(std::string cam_arquivo, String_Set* proibidos);
+    Leitor_Termos(std::string cam_arquivo, String_Set *proibidos);
     std::string ler();
     bool ok();
+
 private:
     std::ifstream arq;
-    String_Set* proibidos;
+    String_Set *proibidos;
+    bool char_ruim(char c);
+    void to_lowercase(std::string &palavra)
 };
 
 #endif

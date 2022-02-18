@@ -35,9 +35,9 @@ void Indice_Termos::add_documento(
     while (1)
     {
         std::string palavra = lei.ler();
-        if(!lei.ok())
+        if (!lei.ok())
             break;
-        
+
         mapa[this->hasher.get_hash(palavra, this->tamanho_atual)].add_certo(palavra, iddoc);
     }
 }
@@ -77,8 +77,8 @@ void Indice_Termos::make_primos()
 
 int Indice_Termos::get_next_tamanho(int tam)
 {
-    for(int i = 0; i < 26; i++)
-        if(this->tamanhos_primos_validos[i] > tam)
+    for (int i = 0; i < 26; i++)
+        if (this->tamanhos_primos_validos[i] > tam)
             return this->tamanhos_primos_validos[i];
     erroAssert(false, "Erro: quantidade de termos distintos grande demais.");
 }
