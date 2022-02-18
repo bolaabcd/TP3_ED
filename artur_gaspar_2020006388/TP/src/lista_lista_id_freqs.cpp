@@ -1,5 +1,5 @@
 //---------------------------------------------------------------------
-// Arquivo      : stopwords_set.hpp
-// Conteudo     : arquivo de implementacao para set de stopwords.
+// Arquivo      : lista_lista_id_freqs.cpp
+// Conteudo     : arquivo de implementacao para lista de lista de ID_Freqs (id+frequencia).
 // Autor        : Artur Gaspar da Silva
 //---------------------------------------------------------------------

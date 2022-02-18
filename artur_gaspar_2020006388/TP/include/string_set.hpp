@@ -1,5 +1,5 @@
 //---------------------------------------------------------------------
-// Arquivo      : stopwords_set.hpp
+// Arquivo      : string_set.hpp
 // Conteudo     : arquivo de cabecalho para set de stopwords.
 // Autor        : Artur Gaspar da Silva
 //---------------------------------------------------------------------
@@ -9,13 +9,14 @@
 
 #include <string>
 
-class Stopwords_Set
+class String_Set
 {
 public:
-    Stopwords_Set();
+    String_Set();
     void add(std::string stopword);
     void remove(std::string stopword);
     void is_in(std::string stopword);
+    int size();
 };
 
 #endif

@@ -5,18 +5,31 @@
 //---------------------------------------------------------------------
 
 #include "indexador.hpp"
-#include <fstream>
+#include "leitor_termos.hpp"
 #include <sstream>
 #include <filesystem>
+#include <string>
 
-Indexador::Indexador() {}
-
-void Indexador::cria_indice(std::string corpus_path, std::string stopwords_path, Indice_Termos &ans)
-{
-    Stopwords_Set stopw;
-    pega_stopwords(stopwords_path, stopw);
-
+Indexador::Indexador(std::string corpus_path, std::string stopwords_path){
+    this->corpus = corpus_path;
+    this->stopwords = stopwords_path;
+    String_Set vazio;
+    arq_pra_set(stopwords_path,this->stopw,vazio);
     std::filesystem::path caminho(corpus_path);
+
+    for (const std::filesystem::directory_entry &dir_entry :
+         std::filesystem::directory_iterator(caminho))
+    {
+        std::string stri;
+        std::stringstream strstream(stri);
+        strstream << dir_entry;
+        arq_pra_set(corpus_path+"/"+ stri, this->termos, this->stopw);
+    }
+}
+
+void Indexador::cria_indice(Indice_Termos &ans)
+{
+    std::filesystem::path caminho(this->corpus);
 
     for (const std::filesystem::directory_entry &dir_entry :
          std::filesystem::directory_iterator(caminho))
@@ -25,76 +38,24 @@ void Indexador::cria_indice(std::string corpus_path, std::string stopwords_path,
         std::string stri;
         std::stringstream strstream(stri);
         strstream << dir_entry;
-        ans.add_documento(stri, stopw);
+        ans.add_documento(this->corpus, stri, this->stopw);
     }
 }
 
-void Indexador::pega_stopwords(std::string stopwords_path, Stopwords_Set &ans)
+void Indexador::arq_pra_set(std::string caminho, String_Set &ans, String_Set &proibidos)
 {
-    std::ifstream arq(stopwords_path);
+    std::ifstream arq(caminho);
 
     while (true)
     {
-        std::string palavra;
-        arq >> palavra;
-        limpa_pontuacao(palavra);
-        to_lowercase(palavra);
-
-        // Pode ser que tenham surgido varias palavras
-        std::stringstream stream(palavra);
-        std::string plvra;
-        while (stream >> plvra)
-        {
-            if (plvra.length() > 0)
-                ans.add(plvra);
-        }
+        Leitor_Termos lei(caminho, &proibidos);
+        std::string palavra = lei.ler();
+        if(!lei.ok())
+            break;
+        ans.add(palavra);
     }
 }
 
-void Indexador::limpa_pontuacao(std::string &palavra)
-{
-    for (int i = 0; i < palavra.length(); i++)
-        if (
-            palavra[i] == ',' ||
-            palavra[i] == '.' ||
-            palavra[i] == ';' ||
-            palavra[i] == ':' ||
-            palavra[i] == '?' ||
-            palavra[i] == '!' ||
-            palavra[i] == '(' ||
-            palavra[i] == ')' ||
-            palavra[i] == '[' ||
-            palavra[i] == ']' ||
-            palavra[i] == '{' ||
-            palavra[i] == '}' ||
-            palavra[i] == '=' ||
-            palavra[i] == '-' ||
-            palavra[i] == '+' ||
-            palavra[i] == '_' ||
-            palavra[i] == "'"[0] ||
-            palavra[i] == '"' ||
-            palavra[i] == '@' ||
-            palavra[i] == '#' ||
-            palavra[i] == '$' ||
-            palavra[i] == '%' ||
-            palavra[i] == '&' ||
-            palavra[i] == '|' ||
-            palavra[i] == '\\' ||
-            palavra[i] == '/' ||
-            palavra[i] == 'º' ||
-            palavra[i] == '°' ||
-            palavra[i] == 'ª' ||
-            palavra[i] == '<' ||
-            palavra[i] == '>' ||
-            palavra[i] == '~' ||
-            palavra[i] == '*' ||
-            palavra[i] == '^')
-            palavra[i] = ' ';
-}
-
-void to_lowercase(std::string &palavra)
-{
-    for (int i = 0; i < palavra.length(); i++)
-        if (palavra[i] >= 'A' && palavra[i] <= 'Z')
-            palavra[i] = palavra[i] - 'A' + 'a';
+int Indexador::quantos_termos(std::string corpus_path) {
+    return this->termos.size();
 }
