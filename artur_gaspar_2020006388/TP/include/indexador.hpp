@@ -1,6 +1,6 @@
 //---------------------------------------------------------------------
 // Arquivo      : indexador.hpp
-// Conteudo     : arquivo de cabeçalho para indexador de termos.
+// Conteudo     : arquivo de cabecalho para indexador de termos.
 // Autor        : Artur Gaspar da Silva
 //---------------------------------------------------------------------
 

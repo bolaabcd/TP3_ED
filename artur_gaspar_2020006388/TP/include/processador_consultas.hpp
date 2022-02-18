@@ -1,6 +1,6 @@
 //---------------------------------------------------------------------
 // Arquivo      : processador_consultas.hpp
-// Conteudo     : arquivo de cabeçalho para processador de consultas.
+// Conteudo     : arquivo de cabecalho para processador de consultas.
 // Autor        : Artur Gaspar da Silva
 //---------------------------------------------------------------------
 

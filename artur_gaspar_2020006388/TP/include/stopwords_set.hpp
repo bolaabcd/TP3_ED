@@ -1,6 +1,6 @@
 //---------------------------------------------------------------------
 // Arquivo      : stopwords_set.hpp
-// Conteudo     : arquivo de cabeçalho para set de stopwords.
+// Conteudo     : arquivo de cabecalho para set de stopwords.
 // Autor        : Artur Gaspar da Silva
 //---------------------------------------------------------------------
 

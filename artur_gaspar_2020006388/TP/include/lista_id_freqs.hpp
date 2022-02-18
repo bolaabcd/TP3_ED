@@ -1,6 +1,6 @@
 //---------------------------------------------------------------------
 // Arquivo      : lista_id_freqs.hpp
-// Conteudo     : arquivo de cabeçalho para lista de ID_Freqs (id+frequencia).
+// Conteudo     : arquivo de cabecalho para lista de ID_Freqs (id+frequencia).
 // Autor        : Artur Gaspar da Silva
 //---------------------------------------------------------------------
 

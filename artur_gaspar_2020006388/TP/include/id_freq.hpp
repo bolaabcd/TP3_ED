@@ -1,6 +1,6 @@
 //---------------------------------------------------------------------
 // Arquivo      : id_freq.hpp
-// Conteudo     : arquivo de cabeçalho para par ID-Frequencia de aparicao.
+// Conteudo     : arquivo de cabecalho para par ID-Frequencia de aparicao.
 // Autor        : Artur Gaspar da Silva
 //---------------------------------------------------------------------
 

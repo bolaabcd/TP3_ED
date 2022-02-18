@@ -1,6 +1,6 @@
 //---------------------------------------------------------------------
 // Arquivo      : ranking_documentos.hpp
-// Conteudo     : arquivo de cabeçalho para ranking de documentos.
+// Conteudo     : arquivo de cabecalho para ranking de documentos.
 // Autor        : Artur Gaspar da Silva
 //---------------------------------------------------------------------
 
