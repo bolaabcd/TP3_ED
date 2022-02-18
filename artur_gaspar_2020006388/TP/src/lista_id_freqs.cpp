@@ -42,15 +42,15 @@ void Lista_ID_Freqs::add(ID_Freq id_freq)
     else
     {
         while (ifn->proximo != nullptr && ifn->id_freq.id != id_freq.id)
-        {
             ifn = ifn->proximo;
-        }
-        if (ifn->proximo == nullptr)
-            ifn->proximo = new ID_Freq_Node(id_freq);
-        else
+
+        if (ifn->id_freq.id == id_freq.id)
         {
             ifn->id_freq.freq += id_freq.freq;
+            this->tamanho--;
         }
+        else
+            ifn->proximo = new ID_Freq_Node(id_freq);
     }
     this->tamanho++;
 }
@@ -122,6 +122,9 @@ void Lista_ID_Freqs::quicksort_interno(int l, int r, ID_Freq *lista)
 
 Lista_ID_Freqs::~Lista_ID_Freqs()
 {
-    if(this->no_frontal != nullptr)
+    if (this->no_frontal != nullptr)
+    {
         this->no_frontal->~ID_Freq_Node();
+        delete this->no_frontal;
+    }
 }

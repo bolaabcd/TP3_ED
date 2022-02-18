@@ -18,7 +18,7 @@ Indice_Termos::Indice_Termos(String_Hasher hasher, int tamanho_inicial)
     this->mapa = new Lista_Lista_ID_Freqs[this->tamanho_atual];
 }
 
-Lista_ID_Freqs &Indice_Termos::get_lista_id_freqs(std::string termo)
+Lista_ID_Freqs *Indice_Termos::get_lista_id_freqs(std::string termo)
 {
     return mapa[this->hasher.get_hash(termo, this->tamanho_atual)].get_certo(termo);
 }
