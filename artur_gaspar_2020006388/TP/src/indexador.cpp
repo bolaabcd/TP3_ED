@@ -37,6 +37,7 @@ void Indexador::cria_doc_data(Doc_Data &doc_data, Indice_Termos &indice)
 {
     doc_data = Doc_Data(this->ndocs);
     int i = 0;
+    std::filesystem::path caminho(this->corpus);
     for (const std::filesystem::directory_entry &dir_entry :
          std::filesystem::directory_iterator(caminho))
     {

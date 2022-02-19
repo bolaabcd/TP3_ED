@@ -8,7 +8,7 @@
 #include "msgassert.hpp"
 #include "memlog.hpp"
 
-ID_Freq_Node::ID_Freq_Node(ID_Freq id_freq) : id_freq(id_freq), proximo(nullptr) {}
+ID_Freq_Node::ID_Freq_Node(ID_Freq ifr) : id_freq(ifr), proximo(nullptr) {}
 
 ID_Freq_Node::~ID_Freq_Node()
 {

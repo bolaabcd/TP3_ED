@@ -6,7 +6,7 @@
 
 #include "id_freq.hpp"
 
-ID_Freq::ID_Freq(int id, int freq) : id(id), freq(freq){};
+ID_Freq::ID_Freq(int iD, int fr) : id(iD), freq(fr){};
 
 ID_Freq::ID_Freq() {}
 

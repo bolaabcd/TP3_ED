@@ -58,7 +58,7 @@ void parse_args(int argc, char **argv)
     out_nome[0] = 0;
     corpus_nome[0] = 0;
     stop_nome[0] = 0;
-    bool i = false, o = false, c = false, s = false, p = false;
+    bool i = false, o = false, cps = false, s = false, p = false;
 
     // getopt - letra indica a opcao, : junto a letra indica parametro
     // no caso de escolher mais de uma operacao, vale a ultima
@@ -76,8 +76,8 @@ void parse_args(int argc, char **argv)
             o = true;
             out_nome = optarg;
         case 'c':
-            avisoAssert(!c, "Mais de uma pasta de documentos passada, a ultima sera usada.");
-            c = true;
+            avisoAssert(!cps, "Mais de uma pasta de documentos passada, a ultima sera usada.");
+            cps = true;
             corpus_nome = optarg;
             break;
         case 's':

@@ -8,7 +8,6 @@
 #define LISTA_ID_FREQS
 
 #include "id_freq.hpp"
-#include "indice_termos.hpp"
 
 class ID_Freq_Node
 {

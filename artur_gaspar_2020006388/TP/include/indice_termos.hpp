@@ -19,7 +19,7 @@ public:
     Indice_Termos(String_Hasher hasher, int tamanho_inicial);
     Lista_ID_Freqs *get_lista_id_freqs(std::string termo);
     void ordena_tudo();
-    void Indice_Termos::add_documento(
+    void add_documento(
         std::string corpus,
         std::string documento,
         String_Set &stopw);

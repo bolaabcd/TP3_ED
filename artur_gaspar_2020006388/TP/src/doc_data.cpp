@@ -6,11 +6,11 @@
 
 #include "doc_data.hpp"
 
-Doc_Data::Doc_Data(int tamanho)
+Doc_Data::Doc_Data(int tam)
 {
-    this->ids = new int[tamanho];
-    this->Wds = new double[tamanho];
-    this->tamanho = tamanho;
+    this->ids = new int[tam];
+    this->Wds = new double[tam];
+    this->tamanho = tam;
 }
 
 int Doc_Data::size()

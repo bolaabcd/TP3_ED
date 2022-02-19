@@ -25,7 +25,7 @@ private:
     std::ifstream arq;
     String_Set *proibidos;
     bool char_ruim(char c);
-    void to_lowercase(std::string &palavra)
+    void to_lowercase(std::string &palavra);
 };
 
 #endif

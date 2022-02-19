@@ -7,8 +7,7 @@
 #ifndef LISTA_LISTA_ID_FREQS
 #define LISTA_LISTA_ID_FREQS
 
-#include "id_freq.hpp"
-#include "indice_termos.hpp"
+#include <string>
 #include "lista_id_freqs.hpp"
 
 class Lista_ID_Freqs_Node
