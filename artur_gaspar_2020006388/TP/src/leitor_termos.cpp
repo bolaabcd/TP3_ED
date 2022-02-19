@@ -44,6 +44,11 @@ bool Leitor_Termos::ok()
     return this->arq.good();
 }
 
+bool Leitor_Termos::eof()
+{
+    return this->eof();
+}
+
 bool Leitor_Termos::char_ruim(char c)
 {
     if (
@@ -95,4 +100,9 @@ void Leitor_Termos::to_lowercase(std::string &palavra)
     for (int i = 0; i < palavra.length(); i++)
         if (palavra[i] >= 'A' && palavra[i] <= 'Z')
             palavra[i] = palavra[i] - 'A' + 'a';
+}
+
+Leitor_Termos::~Leitor_Termos()
+{
+    // nao deleta o ponteiro para proibidos porque nao foi criado aqui.
 }

@@ -32,6 +32,28 @@ ID_Freq_Node *Lista_ID_Freqs::get_front()
     return this->no_frontal;
 }
 
+int Lista_ID_Freqs::get_freq(int id) {
+    ID_Freq_Node *ifn = this->no_frontal;
+    if (ifn == nullptr)
+    {
+        return 0;
+    }
+    else
+    {
+        while (ifn->proximo != nullptr && ifn->id_freq.id != id)
+            ifn = ifn->proximo;
+
+        if (ifn->id_freq.id == id)
+        {
+            return ifn->id_freq.freq;
+        }
+        else
+            return 0;
+    }
+    this->tamanho++;
+
+}
+
 void Lista_ID_Freqs::add(ID_Freq id_freq)
 {
     ID_Freq_Node *ifn = this->no_frontal;
@@ -118,6 +140,11 @@ void Lista_ID_Freqs::quicksort_interno(int l, int r, ID_Freq *lista)
 
     quicksort_interno(l, j, lista);
     quicksort_interno(i, r, lista);
+}
+
+int Lista_ID_Freqs::size()
+{
+    return this->tamanho;
 }
 
 Lista_ID_Freqs::~Lista_ID_Freqs()

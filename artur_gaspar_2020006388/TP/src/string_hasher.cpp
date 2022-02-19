@@ -7,7 +7,10 @@
 #include "string_hasher.hpp"
 #include "msgassert.hpp"
 
-String_Hasher::String_Hasher() {}
+String_Hasher::String_Hasher()
+{
+    this->primo_alfabeto = 31;
+}
 
 int String_Hasher::get_hash(std::string str, int tamanho)
 {

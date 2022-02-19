@@ -133,9 +133,14 @@ int main(int argc, char **argv)
 
     Processador_Consultas pcs;
 
-    Ranking_Documentos ran = pcs.consultar(iter, querry_nome, 10);
+    String_Set stopw = ind.get_stopw();
+    Doc_Data doc_data(0);
+    ind.cria_doc_data(doc_data, iter); 
 
-    ran.imprimir(out_nome);
+    Ranking_Documentos ran(0);
+    pcs.consultar(iter, querry_nome, stopw, doc_data, ran);
+
+    ran.imprimir(out_nome, 10);
 
     // conclui registro de acesso
     return finalizaMemLog();

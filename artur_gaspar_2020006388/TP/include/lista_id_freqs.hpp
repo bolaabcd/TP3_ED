@@ -26,6 +26,8 @@ public:
     ID_Freq_Node *get_front();
     void add(ID_Freq id_freq);
     void ordena();
+    int get_freq(int id);
+    int size();
     ~Lista_ID_Freqs();
 
 private:

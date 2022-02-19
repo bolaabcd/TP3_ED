@@ -23,6 +23,7 @@ public:
         std::string corpus,
         std::string documento,
         String_Set &stopw);
+    int getiddoc(std::string nome);
 
 private:
     String_Hasher hasher;
@@ -30,7 +31,6 @@ private:
     int *tamanhos_primos_validos;
     int tamanho_atual;
     int get_next_tamanho(int tam);
-    int getiddoc(std::string nome);
     void make_primos();
 };
 

@@ -18,6 +18,8 @@ public:
     Leitor_Termos(std::string cam_arquivo, String_Set *proibidos);
     std::string ler();
     bool ok();
+    bool eof();
+    ~Leitor_Termos();
 
 private:
     std::ifstream arq;

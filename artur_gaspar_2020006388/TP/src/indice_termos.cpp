@@ -35,7 +35,7 @@ void Indice_Termos::add_documento(
     while (1)
     {
         std::string palavra = lei.ler();
-        if (!lei.ok())
+        if (!lei.ok() || lei.eof())
             break;
 
         mapa[this->hasher.get_hash(palavra, this->tamanho_atual)].add_certo(palavra, iddoc);
