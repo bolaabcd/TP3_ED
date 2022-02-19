@@ -19,6 +19,7 @@ public:
     void cria_indice(Indice_Termos &indice);
     void cria_doc_data(Doc_Data &doc_data, Indice_Termos &indice);
     int quantos_termos(std::string corpus_path);
+    int quantos_docs();
     String_Set &get_stopw();
 
 private:

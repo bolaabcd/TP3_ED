@@ -35,7 +35,6 @@ Indexador::Indexador(std::string corpus_path, std::string stopwords_path)
 
 void Indexador::cria_doc_data(Doc_Data &doc_data, Indice_Termos &indice)
 {
-    doc_data = Doc_Data(this->ndocs);
     int i = 0;
     std::filesystem::path caminho(this->corpus);
     for (const std::filesystem::directory_entry &dir_entry :
@@ -49,19 +48,24 @@ void Indexador::cria_doc_data(Doc_Data &doc_data, Indice_Termos &indice)
         int iddoc = indice.getiddoc(stri);
         while (1)
         {
-            Leitor_Termos lei(this->corpus+"/"+stri, &(this->stopw));
+            Leitor_Termos lei(this->corpus + "/" + stri, &(this->stopw));
             std::string termo = lei.ler();
-            if(!lei.ok() || lei.eof())
+            if (!lei.ok() || lei.eof())
                 break;
             double ft = indice.get_lista_id_freqs(termo)->size();
             double idf = log((double)this->ndocs / (double)ft);
             double ftd = indice.get_lista_id_freqs(termo)->get_freq(iddoc);
-            Wd += (ftd*idf)*(ftd*idf);
+            Wd += (ftd * idf) * (ftd * idf);
         }
         Wd = sqrt(Wd);
-        doc_data.set_id(i,iddoc);
-        doc_data.set_Wd(i,Wd);
+        doc_data.set_id(i, iddoc);
+        doc_data.set_Wd(i, Wd);
     }
+}
+
+int Indexador::quantos_docs()
+{
+    return ndocs;
 }
 
 String_Set &Indexador::get_stopw()
@@ -89,9 +93,9 @@ void Indexador::arq_pra_set(std::string caminho, String_Set &ans, String_Set &pr
 {
     std::ifstream arq(caminho);
 
+    Leitor_Termos lei(caminho, &proibidos);
     while (true)
     {
-        Leitor_Termos lei(caminho, &proibidos);
         std::string palavra = lei.ler();
         if (!lei.ok() || lei.eof())
             break;

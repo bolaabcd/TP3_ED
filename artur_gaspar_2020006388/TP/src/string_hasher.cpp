@@ -22,7 +22,7 @@ int String_Hasher::get_hash(std::string str, int tamanho)
                (long long)(str[i] - 'a') *
                    (long long)this->modpow(this->primo_alfabeto, i, tamanho)) %
               (long long)tamanho;
-        erroAssert(ans <= INT32_MAX, "Limite de inteiro alcancado!");
+        erroAssert(ans <= INT32_MAX && ans >= 0, "Limite de inteiro alcancado!");
     }
 
     return ans;

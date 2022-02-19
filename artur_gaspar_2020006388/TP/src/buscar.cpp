@@ -13,6 +13,8 @@
 #include "processador_consultas.hpp"
 #include "ranking_documentos.hpp"
 
+#include <iostream>
+
 // variaveis globais para opcoes
 std::string reg_nome, querry_nome, out_nome, corpus_nome, stop_nome;
 int regmem;
@@ -75,6 +77,7 @@ void parse_args(int argc, char **argv)
             avisoAssert(!o, "Mais de um arquivo de saida passado, o ultimo sera usado.");
             o = true;
             out_nome = optarg;
+            break;
         case 'c':
             avisoAssert(!cps, "Mais de uma pasta de documentos passada, a ultima sera usada.");
             cps = true;
@@ -128,16 +131,18 @@ int main(int argc, char **argv)
 
     Indexador ind(corpus_nome, stop_nome);
 
-    Indice_Termos iter(String_Hasher(), 16);
+    int amttermos = ind.quantos_termos(corpus_nome);
+    int amtdocs = ind.quantos_docs();
+    Indice_Termos iter(String_Hasher(), amttermos);
     ind.cria_indice(iter);
 
     Processador_Consultas pcs;
 
     String_Set stopw = ind.get_stopw();
-    Doc_Data doc_data(0);
+    Doc_Data doc_data(amtdocs);
     ind.cria_doc_data(doc_data, iter); 
 
-    Ranking_Documentos ran(0);
+    Ranking_Documentos ran(amtdocs);
     pcs.consultar(iter, querry_nome, stopw, doc_data, ran);
 
     ran.imprimir(out_nome, 10);

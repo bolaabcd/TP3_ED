@@ -10,9 +10,9 @@
 #include <fstream>
 #include <sstream>
 
-Indice_Termos::Indice_Termos(String_Hasher hasher, int tamanho_inicial)
+Indice_Termos::Indice_Termos(String_Hasher hsher, int tamanho_inicial)
 {
-    this->hasher = hasher;
+    this->hasher = hsher;
     this->make_primos();
     this->tamanho_atual = this->get_next_tamanho(tamanho_inicial);
     this->mapa = new Lista_Lista_ID_Freqs[this->tamanho_atual];
@@ -95,7 +95,7 @@ int Indice_Termos::getiddoc(std::string nome)
     bool iniciou = false;
     for (int i = nome.size() - 1; i >= 0; i--)
     {
-        if (iniciou && nome[i] < '0' || nome[i] > '9')
+        if (iniciou && (nome[i] < '0' || nome[i] > '9'))
             break;
         else if (iniciou)
             numrev.push_back(nome[i]);
@@ -106,4 +106,9 @@ int Indice_Termos::getiddoc(std::string nome)
     for (int i = numrev.size() - 1; i >= 0; i--)
         num.push_back(numrev[i]);
     return atoi(num.c_str());
+}
+
+Indice_Termos::~Indice_Termos(){
+    delete[] this->mapa;
+    delete[] this->tamanhos_primos_validos;
 }

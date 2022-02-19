@@ -24,6 +24,7 @@ public:
         std::string documento,
         String_Set &stopw);
     int getiddoc(std::string nome);
+    ~Indice_Termos();
 
 private:
     String_Hasher hasher;

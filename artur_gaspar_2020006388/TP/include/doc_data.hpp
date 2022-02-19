@@ -16,6 +16,7 @@ public:
     double get_Wd(int pos);
     void set_id(int pos, int id);
     void set_Wd(int pos, double Wd);
+    ~Doc_Data();
 
 private:
     int *ids;

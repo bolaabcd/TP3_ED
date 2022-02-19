@@ -5,11 +5,12 @@
 //---------------------------------------------------------------------
 
 #include "string_set.hpp"
+#include "msgassert.hpp"
 #include <string>
 
-String_No::String_No(std::string str)
+String_No::String_No(std::string stri)
 {
-    this->str = str;
+    this->str = stri;
     this->esq = nullptr;
     this->dir = nullptr;
 }
@@ -30,8 +31,8 @@ String_No::~String_No()
 
 String_Set::String_Set()
 {
-    raiz = nullptr;
-    tamanho = 0;
+    this->raiz = nullptr;
+    this->tamanho = 0;
 }
 
 void String_Set::add(std::string str)
@@ -68,6 +69,8 @@ bool String_Set::is_in_auxiliar(String_No **raiz_atual, std::string str)
         else if ((*raiz_atual)->str > str)
             return is_in_auxiliar(&((*raiz_atual)->esq), str);
     }
+    erroAssert(false, "Estado invalido atingido");
+    return false;
 }
 
 int String_Set::size()

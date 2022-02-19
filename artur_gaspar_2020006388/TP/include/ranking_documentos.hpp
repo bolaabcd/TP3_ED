@@ -19,6 +19,7 @@ public:
     int get_id(int pos);
     double get_Wd(int pos);
     void ordena();
+    ~Ranking_Documentos();
 
 private:
     int tamanho;

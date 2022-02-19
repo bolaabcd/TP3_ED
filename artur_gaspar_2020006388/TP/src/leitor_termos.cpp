@@ -8,10 +8,10 @@
 #include "string_set.hpp"
 #include <string>
 
-Leitor_Termos::Leitor_Termos(std::string cam_arquivo, String_Set *proibidos)
+Leitor_Termos::Leitor_Termos(std::string cam_arquivo, String_Set *proib)
 {
     this->arq = std::ifstream(cam_arquivo);
-    this->proibidos = proibidos;
+    this->proibidos = proib;
 }
 std::string Leitor_Termos::ler()
 {
@@ -46,50 +46,51 @@ bool Leitor_Termos::ok()
 
 bool Leitor_Termos::eof()
 {
-    return this->eof();
+    return this->arq.eof();
 }
 
 bool Leitor_Termos::char_ruim(char c)
 {
-    if (
-        c == ',' ||
-        c == '.' ||
-        c == ';' ||
-        c == ':' ||
-        c == '?' ||
-        c == '!' ||
-        c == '(' ||
-        c == ')' ||
-        c == '[' ||
-        c == ']' ||
-        c == '{' ||
-        c == '}' ||
-        c == '=' ||
-        c == '-' ||
-        c == '+' ||
-        c == '_' ||
-        c == "'"[0] ||
-        c == '"' ||
-        c == '@' ||
-        c == '#' ||
-        c == '$' ||
-        c == '%' ||
-        c == '&' ||
-        c == '|' ||
-        c == '\\' ||
-        c == '/' ||
-        c == 'º' ||
-        c == '°' ||
-        c == 'ª' ||
-        c == '<' ||
-        c == '>' ||
-        c == '~' ||
-        c == '*' ||
-        c == '^' ||
-        c == ' ' ||
-        c == '   ' ||
-        c == '\n' ||
-        c == '\r')
+    // if (
+    //     c == ',' ||
+    //     c == '.' ||
+    //     c == ';' ||
+    //     c == ':' ||
+    //     c == '?' ||
+    //     c == '!' ||
+    //     c == '(' ||
+    //     c == ')' ||
+    //     c == '[' ||
+    //     c == ']' ||
+    //     c == '{' ||
+    //     c == '}' ||
+    //     c == '=' ||
+    //     c == '-' ||
+    //     c == '+' ||
+    //     c == '_' ||
+    //     c == "'"[0] ||
+    //     c == '"' ||
+    //     c == '@' ||
+    //     c == '#' ||
+    //     c == '$' ||
+    //     c == '%' ||
+    //     c == '&' ||
+    //     c == '|' ||
+    //     c == '\\' ||
+    //     c == '/' ||
+    // c == 'º' ||
+    // c == '°' ||
+    // c == 'ª' ||
+    // c == '<' ||
+    // c == '>' ||
+    // c == '~' ||
+    // c == '*' ||
+    // c == '^' ||
+    // c == ' ' ||
+    // // c == '   ' ||
+    // c == '\n' ||
+    // c == '\r')
+    if (!(c >= 'a' && c <= 'z') || !(c >= 'A' && c <= 'Z'))
         return true;
     else
         return false;

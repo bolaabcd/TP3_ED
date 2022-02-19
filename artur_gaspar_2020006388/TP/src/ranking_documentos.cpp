@@ -8,9 +8,11 @@
 #include "msgassert.hpp"
 #include <fstream>
 
-Ranking_Documentos::Ranking_Documentos(int tamanho)
+Ranking_Documentos::Ranking_Documentos(int tam)
 {
-    this->tamanho = tamanho;
+    this->tamanho = tam;
+    this->ids = new int[tam];
+    this->vals = new double[tam];
 }
 
 void Ranking_Documentos::imprimir(std::string out_nome, int num_posicoes)
@@ -32,6 +34,8 @@ void Ranking_Documentos::set_Wd(int pos, double Wd)
 
 void Ranking_Documentos::set_id(int pos, int id)
 {
+    erroAssert(this->ids != nullptr, "Lista de ids inexistente.");
+    erroAssert(pos < tamanho && pos >= 0, "Tentativa de acessar posicao invalida.");
     this->ids[pos] = id;
 }
 
@@ -97,4 +101,10 @@ void Ranking_Documentos::quicksort_interno(int l, int r)
 
     quicksort_interno(l, j);
     quicksort_interno(i, r);
+}
+
+
+Ranking_Documentos::~Ranking_Documentos(){
+    delete[] this->ids;
+    delete[] this->vals;
 }

@@ -20,7 +20,6 @@ void Processador_Consultas::consultar(
     Doc_Data &doc_data,
     Ranking_Documentos &rank)
 {
-    rank = Ranking_Documentos(doc_data.size());
     for (int j = 0; j < doc_data.size(); j++)
         rank.set_id(j, doc_data.get_id(j));
     while (1)
