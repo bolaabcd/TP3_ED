@@ -12,7 +12,6 @@ Lista_ID_Freqs_Node::~Lista_ID_Freqs_Node()
 {
     if (this->proximo != nullptr)
     {
-        this->proximo->~Lista_ID_Freqs_Node();
         delete this->proximo;
     }
 }
@@ -52,6 +51,7 @@ void Lista_Lista_ID_Freqs::add_certo(std::string termo, int iddoc)
         ifn = new Lista_ID_Freqs_Node();
         ifn->termo_associado = termo;
         ifn->lista_id_freq.add(val);
+        this->no_frontal = ifn;
     }
     else
     {
@@ -72,29 +72,10 @@ void Lista_Lista_ID_Freqs::add_certo(std::string termo, int iddoc)
     this->tamanho++;
 }
 
-void Lista_Lista_ID_Freqs::ordena_tudo()
-{
-    Lista_ID_Freqs_Node *ifn = this->no_frontal;
-    if (ifn == nullptr)
-    {
-        return;
-    }
-    else
-    {
-        while (ifn->proximo != nullptr)
-        {
-            ifn->lista_id_freq.ordena();
-            ifn = ifn->proximo;
-        }
-        ifn->lista_id_freq.ordena();
-    }
-}
-
 Lista_Lista_ID_Freqs::~Lista_Lista_ID_Freqs()
 {
     if (this->no_frontal != nullptr)
     {
-        this->no_frontal->~Lista_ID_Freqs_Node();
         delete this->no_frontal;
     }
 }

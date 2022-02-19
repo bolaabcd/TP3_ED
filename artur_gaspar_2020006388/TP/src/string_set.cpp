@@ -19,13 +19,13 @@ String_No::~String_No()
 {
     if (this->esq != nullptr)
     {
-        this->esq->~String_No();
         delete this->esq;
+        this->esq = nullptr;
     }
     if (this->dir != nullptr)
     {
-        this->dir->~String_No();
         delete this->dir;
+        this->dir = nullptr;
     }
 }
 
@@ -43,13 +43,20 @@ void String_Set::add(std::string str)
 void String_Set::add_auxiliar(String_No **raiz_atual, std::string str)
 {
     if (*raiz_atual == nullptr)
+    {
         *raiz_atual = new String_No(str);
+        this->tamanho++;
+    }
     else
     {
         if ((*raiz_atual)->str < str)
+        {
             add_auxiliar(&((*raiz_atual)->dir), str);
+        }
         else if ((*raiz_atual)->str > str)
+        {
             add_auxiliar(&((*raiz_atual)->esq), str);
+        }
     }
 }
 
@@ -62,6 +69,8 @@ bool String_Set::is_in_auxiliar(String_No **raiz_atual, std::string str)
 {
     if (*raiz_atual == nullptr)
         return false;
+    else if ((*raiz_atual)->str == str)
+        return true;
     else
     {
         if ((*raiz_atual)->str < str)
@@ -82,7 +91,7 @@ String_Set::~String_Set()
 {
     if (this->raiz != nullptr)
     {
-        this->raiz->~String_No();
         delete this->raiz;
+        this->raiz = nullptr;
     }
 }

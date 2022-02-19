@@ -20,7 +20,7 @@ Indice_Termos::Indice_Termos(String_Hasher hsher, int tamanho_inicial)
 
 Lista_ID_Freqs *Indice_Termos::get_lista_id_freqs(std::string termo)
 {
-    return mapa[this->hasher.get_hash(termo, this->tamanho_atual)].get_certo(termo);
+    return this->mapa[this->hasher.get_hash(termo, this->tamanho_atual)].get_certo(termo);
 }
 
 void Indice_Termos::add_documento(
@@ -40,12 +40,6 @@ void Indice_Termos::add_documento(
 
         mapa[this->hasher.get_hash(palavra, this->tamanho_atual)].add_certo(palavra, iddoc);
     }
-}
-
-void Indice_Termos::ordena_tudo()
-{
-    for (int i = 0; i < this->tamanho_atual; i++)
-        this->mapa[i].ordena_tudo();
 }
 
 void Indice_Termos::make_primos()
@@ -100,7 +94,10 @@ int Indice_Termos::getiddoc(std::string nome)
         else if (iniciou)
             numrev.push_back(nome[i]);
         else if (nome[i] >= '0' && nome[i] <= '9')
+        {
             iniciou = true;
+            i++;
+        }
     }
     std::string num;
     for (int i = numrev.size() - 1; i >= 0; i--)
@@ -108,7 +105,8 @@ int Indice_Termos::getiddoc(std::string nome)
     return atoi(num.c_str());
 }
 
-Indice_Termos::~Indice_Termos(){
+Indice_Termos::~Indice_Termos()
+{
     delete[] this->mapa;
     delete[] this->tamanhos_primos_validos;
 }

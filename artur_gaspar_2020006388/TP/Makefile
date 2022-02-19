@@ -1,6 +1,6 @@
 #---------------------------------------------------------------------
 # Arquivo	: Makefile
-# Conteúdo	: compilar o programa ordena
+# Conteúdo	: compilar o programa buscar
 # Autor		: Artur Gaspar da Silva (artur.gaspar@dcc.ufmg.br)
 #---------------------------------------------------------------------
 # Opções	: make all - compila tudo

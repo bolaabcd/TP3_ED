@@ -24,7 +24,6 @@ public:
     Lista_ID_Freqs();
     ID_Freq_Node *get_front();
     void add(ID_Freq id_freq);
-    void ordena();
     int get_freq(int id);
     int size();
     ~Lista_ID_Freqs();
@@ -32,7 +31,6 @@ public:
 private:
     ID_Freq_Node *no_frontal;
     int tamanho;
-    void quicksort_interno(int l, int r, ID_Freq *lista);
 };
 
 #endif

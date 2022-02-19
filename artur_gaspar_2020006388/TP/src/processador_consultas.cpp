@@ -21,28 +21,32 @@ void Processador_Consultas::consultar(
     Ranking_Documentos &rank)
 {
     for (int j = 0; j < doc_data.size(); j++)
+    {
         rank.set_id(j, doc_data.get_id(j));
+        rank.set_val(j, 0);
+    }
+    Leitor_Termos lei(arq_consulta, &stopw);
     while (1)
     {
-        Leitor_Termos lei(arq_consulta, &stopw);
         std::string termo = lei.ler();
         if (!lei.ok() || lei.eof())
             break;
         Lista_ID_Freqs *lista = indice.get_lista_id_freqs(termo);
         if (lista == nullptr)
             continue;
-        double idf = log(((double)doc_data.size())/(lista->size()));
+        double idf = log(((double)doc_data.size()) / (lista->size()));
 
-        for(int j = 0; j < doc_data.size(); j++){
+        for (int j = 0; j < doc_data.size(); j++)
+        {
             double ftd = lista->get_freq(doc_data.get_id(j));
             double wij = ftd * idf;
             double wiq = ftd > 0 ? 1 : 0;
-            rank.set_Wd(j, rank.get_Wd(j) + wij * wiq);
+            rank.set_val(j, rank.get_val(j) + wij * wiq);
         }
     }
     for (int j = 0; j < doc_data.size(); j++)
     {
-        rank.set_Wd(j, rank.get_Wd(j) / doc_data.get_Wd(j));
+        rank.set_val(j, rank.get_val(j) / doc_data.get_Wd(j));
     }
     rank.ordena();
 }

@@ -1,6 +1,6 @@
 //---------------------------------------------------------------------
-// Arquivo      : ordena.cpp
-// Conteudo     : arquivo principal do programa ordena
+// Arquivo      : buscar.cpp
+// Conteudo     : arquivo principal do programa buscar
 // Autor        : Artur Gaspar da Silva
 //---------------------------------------------------------------------
 
@@ -138,9 +138,9 @@ int main(int argc, char **argv)
 
     Processador_Consultas pcs;
 
-    String_Set stopw = ind.get_stopw();
+    String_Set &stopw = ind.get_stopw();
     Doc_Data doc_data(amtdocs);
-    ind.cria_doc_data(doc_data, iter); 
+    ind.cria_doc_data(doc_data, iter);
 
     Ranking_Documentos ran(amtdocs);
     pcs.consultar(iter, querry_nome, stopw, doc_data, ran);

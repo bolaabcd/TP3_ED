@@ -38,8 +38,8 @@ void Doc_Data::set_Wd(int pos, double Wd)
     this->Wds[pos] = Wd;
 }
 
-
-Doc_Data::~Doc_Data(){
+Doc_Data::~Doc_Data()
+{
     delete[] this->ids;
     delete[] this->Wds;
 }

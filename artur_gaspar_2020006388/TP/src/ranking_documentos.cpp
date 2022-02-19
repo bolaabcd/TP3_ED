@@ -21,15 +21,17 @@ void Ranking_Documentos::imprimir(std::string out_nome, int num_posicoes)
     avisoAssert(num_posicoes <= this->tamanho, "Menos que 10 documentos, imprimindo rank com a quantidade presente de documentos.");
     for (int i = 0; i < num_posicoes && i < this->tamanho; i++)
     {
+        if (this->vals[i] <= 0)
+            break;
         out << this->ids[i] << " ";
     }
     out << std::endl;
     out.close();
 }
 
-void Ranking_Documentos::set_Wd(int pos, double Wd)
+void Ranking_Documentos::set_val(int pos, double val)
 {
-    this->vals[pos] = Wd;
+    this->vals[pos] = val;
 }
 
 void Ranking_Documentos::set_id(int pos, int id)
@@ -44,7 +46,7 @@ int Ranking_Documentos::get_id(int pos)
     return this->ids[pos];
 }
 
-double Ranking_Documentos::get_Wd(int pos)
+double Ranking_Documentos::get_val(int pos)
 {
     return this->vals[pos];
 }
@@ -52,6 +54,14 @@ double Ranking_Documentos::get_Wd(int pos)
 void Ranking_Documentos::ordena()
 {
     this->quicksort_interno(0, this->tamanho - 1);
+}
+
+bool Ranking_Documentos::menor_aux(int l, int r)
+{
+    if (this->vals[l] == this->vals[r])
+        return this->ids[l] > this->ids[r];
+    else
+        return this->vals[l] < this->vals[r];
 }
 
 void Ranking_Documentos::quicksort_interno(int l, int r)
@@ -62,28 +72,29 @@ void Ranking_Documentos::quicksort_interno(int l, int r)
 
     int meio = (l + r) / 2;
     int pivo = meio;
-    if (this->vals[l] < this->vals[r])
+    if (this->menor_aux(l, r))
     {
-        if (this->vals[meio] < this->vals[l])
+        if (this->menor_aux(meio, l))
             pivo = l;
-        else if (this->vals[r] < this->vals[meio])
+        else if (this->menor_aux(r, meio))
             pivo = r;
     }
     else
     {
-        if (this->vals[meio] < this->vals[r])
+        if (this->menor_aux(meio, r))
             pivo = r;
-        else if (this->vals[l] < this->vals[meio])
+        else if (this->menor_aux(l, meio))
             pivo = l;
     }
 
     double aux = this->vals[pivo];
+    int auxid = this->ids[pivo];
     int i, j;
     for (i = l, j = r;;)
     {
-        for (; i <= j && aux < this->vals[i]; i++)
+        for (; i <= j && (aux == this->vals[i] ? auxid > this->ids[i] : aux < this->vals[i]); i++)
             ;
-        for (; i <= j && this->vals[j] < aux; j--)
+        for (; i <= j && (aux == this->vals[j] ? this->ids[j] > auxid : this->vals[j] < aux); j--)
             ;
 
         if (i > j)
@@ -103,8 +114,8 @@ void Ranking_Documentos::quicksort_interno(int l, int r)
     quicksort_interno(i, r);
 }
 
-
-Ranking_Documentos::~Ranking_Documentos(){
+Ranking_Documentos::~Ranking_Documentos()
+{
     delete[] this->ids;
     delete[] this->vals;
 }

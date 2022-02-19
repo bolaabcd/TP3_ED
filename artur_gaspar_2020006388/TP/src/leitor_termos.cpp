@@ -15,29 +15,34 @@ Leitor_Termos::Leitor_Termos(std::string cam_arquivo, String_Set *proib)
 }
 std::string Leitor_Termos::ler()
 {
-    std::string ans;
-
-    // Ignora caracteres invalidos
     while (this->arq.good())
     {
-        char next = this->arq.peek();
-        if (this->char_ruim(next))
-            this->arq.get();
-        else
-            break;
-    }
+        std::string ans;
 
-    while (this->arq.good())
-    {
-        char next = this->arq.peek();
-        if (this->char_ruim(next))
-            break;
-        else
-            ans.push_back(this->arq.get());
-    }
+        // Ignora caracteres invalidos
+        while (this->arq.good())
+        {
+            char next = this->arq.peek();
+            if (this->char_ruim(next))
+                this->arq.get();
+            else
+                break;
+        }
 
-    this->to_lowercase(ans);
-    return ans;
+        while (this->arq.good())
+        {
+            char next = this->arq.peek();
+            if (this->char_ruim(next))
+                break;
+            else
+                ans.push_back(this->arq.get());
+        }
+
+        this->to_lowercase(ans);
+        if (!proibidos->is_in(ans))
+            return ans;
+    }
+    return "";
 }
 bool Leitor_Termos::ok()
 {
@@ -90,7 +95,7 @@ bool Leitor_Termos::char_ruim(char c)
     // // c == '   ' ||
     // c == '\n' ||
     // c == '\r')
-    if (!(c >= 'a' && c <= 'z') || !(c >= 'A' && c <= 'Z'))
+    if (!((c >= 'a' && c <= 'z') || (c >= 'A' && c <= 'Z')))
         return true;
     else
         return false;
@@ -105,5 +110,6 @@ void Leitor_Termos::to_lowercase(std::string &palavra)
 
 Leitor_Termos::~Leitor_Termos()
 {
+    this->arq.close();
     // nao deleta o ponteiro para proibidos porque nao foi criado aqui.
 }

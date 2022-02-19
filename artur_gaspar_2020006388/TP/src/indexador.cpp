@@ -24,9 +24,10 @@ Indexador::Indexador(std::string corpus_path, std::string stopwords_path)
          std::filesystem::directory_iterator(caminho))
     {
         this->ndocs++;
-        std::string stri;
-        std::stringstream strstream(stri);
-        strstream << dir_entry;
+        std::string stri = dir_entry.path();
+        Indice_Termos tmp(String_Hasher(), 0);
+        int iddoc = tmp.getiddoc(stri);
+        stri = std::to_string(iddoc) + ".txt";
         arq_pra_set(corpus_path + "/" + stri, this->termos, this->stopw);
     }
 
@@ -40,18 +41,20 @@ void Indexador::cria_doc_data(Doc_Data &doc_data, Indice_Termos &indice)
     for (const std::filesystem::directory_entry &dir_entry :
          std::filesystem::directory_iterator(caminho))
     {
-        this->ndocs++;
-        std::string stri;
-        std::stringstream strstream(stri);
-        strstream << dir_entry;
+        std::string stri = dir_entry.path();
         double Wd = 0;
         int iddoc = indice.getiddoc(stri);
+        stri = std::to_string(iddoc) + ".txt";
+        String_Set ja_lidos;
+        Leitor_Termos lei(this->corpus + "/" + stri, &(this->stopw));
         while (1)
         {
-            Leitor_Termos lei(this->corpus + "/" + stri, &(this->stopw));
             std::string termo = lei.ler();
             if (!lei.ok() || lei.eof())
                 break;
+            if (ja_lidos.is_in(termo))
+                continue;
+            ja_lidos.add(termo);
             double ft = indice.get_lista_id_freqs(termo)->size();
             double idf = log((double)this->ndocs / (double)ft);
             double ftd = indice.get_lista_id_freqs(termo)->get_freq(iddoc);
@@ -60,6 +63,7 @@ void Indexador::cria_doc_data(Doc_Data &doc_data, Indice_Termos &indice)
         Wd = sqrt(Wd);
         doc_data.set_id(i, iddoc);
         doc_data.set_Wd(i, Wd);
+        i++;
     }
 }
 
@@ -80,13 +84,11 @@ void Indexador::cria_indice(Indice_Termos &ans)
     for (const std::filesystem::directory_entry &dir_entry :
          std::filesystem::directory_iterator(caminho))
     {
-        std::string stri;
-        std::stringstream strstream(stri);
-        strstream << dir_entry;
+        std::string stri = dir_entry.path();
+        int iddoc = ans.getiddoc(stri);
+        stri = std::to_string(iddoc) + ".txt";
         ans.add_documento(this->corpus, stri, this->stopw);
     }
-
-    ans.ordena_tudo();
 }
 
 void Indexador::arq_pra_set(std::string caminho, String_Set &ans, String_Set &proibidos)
