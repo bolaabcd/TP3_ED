@@ -57,6 +57,7 @@ void String_Set::add_auxiliar(String_No **raiz_atual, std::string str)
 // Entrada: raiz_atual e string a adicionar.
 // Saida: nada.
 {
+    erroAssert(raiz_atual != nullptr, "E preciso especificar a raiz pra adicionar numa subarvore de uma arvore binaria.");
     if (*raiz_atual == nullptr)
     {
         *raiz_atual = new String_No(str);
@@ -88,6 +89,8 @@ bool String_Set::is_in_auxiliar(String_No **raiz_atual, std::string str)
 // Entrada: raiz_atual e string a procurar.
 // Saida: verdadeiro se a string esta na arvore dessa raiz, falso caso contrario.
 {
+    erroAssert(raiz_atual != nullptr, "E preciso especificar a raiz pra checar se tem um elemento na arvore binaria.");
+
     if (*raiz_atual == nullptr)
         return false;
     else if ((*raiz_atual)->str == str)
@@ -99,7 +102,7 @@ bool String_Set::is_in_auxiliar(String_No **raiz_atual, std::string str)
         else if ((*raiz_atual)->str > str)
             return is_in_auxiliar(&((*raiz_atual)->esq), str);
     }
-    erroAssert(false, "Estado invalido atingido");
+    erroAssert(false, "Estado invalido atingido ao procurar elemento na arvore binaria.");
     return false;
 }
 

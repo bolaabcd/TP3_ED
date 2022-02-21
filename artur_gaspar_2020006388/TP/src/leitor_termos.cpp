@@ -6,6 +6,7 @@
 
 #include "leitor_termos.hpp"
 #include "string_set.hpp"
+#include "msgassert.hpp"
 #include <string>
 
 Leitor_Termos::Leitor_Termos(std::string cam_arquivo, String_Set *proib)
@@ -13,7 +14,11 @@ Leitor_Termos::Leitor_Termos(std::string cam_arquivo, String_Set *proib)
 // Entrada: caminho do arquivo do qual vamos ler e apontador prum conjunto de palavras proibidas.
 // Saida: objeto instanciado.
 {
+    erroAssert(proib = nullptr, "Apontador pro conjunto de termos proibidos nao pode ser nulo");
+
     this->arq = std::ifstream(cam_arquivo);
+    erroAssert(!this->arq.fail(), "Nao foi possivel abrir o arquivo '" + cam_arquivo + "'.");
+    
     this->proibidos = proib;
 }
 std::string Leitor_Termos::ler()
@@ -89,6 +94,7 @@ Leitor_Termos::~Leitor_Termos()
 // Entrada: nada.
 // Saida: nada.
 {
-    this->arq.close();
+    if(this->arq.is_open())
+        this->arq.close();
     // nao deleta o ponteiro para proibidos porque nao foi criado aqui.
 }

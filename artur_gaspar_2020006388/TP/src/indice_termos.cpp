@@ -15,6 +15,7 @@ Indice_Termos::Indice_Termos(String_Hasher hsher, int tamanho_inicial)
 // Entrada: hash a utilizar e tamanho inicial (que na verdade nao muda durante a execucao do programa).
 // Saida: objeto inicializado.
 {
+    erroAssert(tamanho_inicial >= 0, "Tamanho de indice invalido.");
     this->hasher = hsher;
     this->make_primos();
     this->tamanho_atual = this->get_next_tamanho(2*tamanho_inicial);
@@ -26,6 +27,8 @@ Lista_ID_Freqs *Indice_Termos::get_lista_id_freqs(std::string termo)
 // Entrada: termo cuja lista sera retornada.
 // Saida: apontador pra lista correspondente ao termo, ou um apontador nulo se ele nao estiver presente no corpus.
 {
+    int pos = this->hasher.get_hash(termo, this->tamanho_atual);
+    erroAssert(pos < this->tamanho_atual && pos >= 0, "Tentativa de acesso a posicao de indice invalida.");
     return this->mapa[this->hasher.get_hash(termo, this->tamanho_atual)].get_certo(termo);
 }
 
@@ -38,6 +41,7 @@ void Indice_Termos::add_documento(
 // Saida: nada.
 {
     int iddoc = this->getiddoc(documento);
+    erroAssert(iddoc >= 0, "ID de um documento nao pode ser negativo.");
 
     Leitor_Termos lei(corpus + "/" + documento, &stopw);
 
@@ -46,8 +50,9 @@ void Indice_Termos::add_documento(
         std::string palavra = lei.ler();
         if (!lei.ok() || lei.eof())
             break;
-
-        mapa[this->hasher.get_hash(palavra, this->tamanho_atual)].add_certo(palavra, iddoc);
+        int pos = this->hasher.get_hash(palavra, this->tamanho_atual);
+        erroAssert(pos < this->tamanho_atual && pos >= 0, "Tentativa de acesso a posicao de indice invalida.");
+        mapa[pos].add_certo(palavra, iddoc);
     }
 }
 
@@ -56,7 +61,7 @@ void Indice_Termos::make_primos()
 // Entrada: nada.
 // Saida: nada.
 {
-    // Gerado externamente
+    // Gerado externamente com crivo linear
     this->tamanhos_primos_validos = new int[26]{
         17,
         37,
@@ -95,7 +100,7 @@ int Indice_Termos::get_next_tamanho(int tam)
     for (int i = 0; i < 26; i++)
         if (this->tamanhos_primos_validos[i] > tam)
             return this->tamanhos_primos_validos[i];
-    erroAssert(false, "Erro: quantidade de termos distintos grande demais.");
+    erroAssert(false, "Numero pedido grande demais (provavelmente a quantidade de termos distintos no corpus eh poderosa demais para esse humilde programa).");
 }
 
 int Indice_Termos::getiddoc(std::string nome)

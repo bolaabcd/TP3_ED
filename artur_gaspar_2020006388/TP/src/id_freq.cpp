@@ -5,12 +5,16 @@
 //---------------------------------------------------------------------
 
 #include "id_freq.hpp"
+#include "msgassert.hpp"
 
-ID_Freq::ID_Freq(int iD, int fr) : id(iD), freq(fr)
+ID_Freq::ID_Freq(int ID, int fr) : id(ID), freq(fr)
 // Descricao: inicializa um ID_Freq com os valores passados.
 // Entrada: ID e frequencia.
 // Saida: objeto inicializado.
-{};
+{
+    erroAssert(ID >= 0, "IDs negativos nao sao aceitos.");
+    erroAssert(fr >= 0, "Frequencias negativas nao sao aceitas");
+};
 
 ID_Freq::ID_Freq() 
 // Descricao: inicializa um ID_Freq vazio.

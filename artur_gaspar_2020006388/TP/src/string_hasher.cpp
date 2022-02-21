@@ -20,6 +20,8 @@ int String_Hasher::get_hash(std::string str, int tamanho)
 // Entrada: hash e tamanho da hashtable em que a string sera encaixada.
 // Saida: posicao da string na hashtable.
 {
+    erroAssert(tamanho >= 0, "Tamanho da tabela de hash nao pode ser negativo.");
+
     long long ans = 0;
 
     for (int i = 0; i < (int)str.length(); i++)
@@ -39,6 +41,10 @@ int String_Hasher::modpow(int a, int b, int m)
 // Entrada: a, b e m.
 // Saida: valor resultante da operacao.
 {
+    erroAssert(a >= 0, "So podemos elevar numeros nao-negativos.");
+    erroAssert(b >= 0, "Expoente deve ser nao-negativo.");
+    erroAssert(m > 0, "Valor de modulo a ser aplicado deve ser positivo");
+
     long long ans = 1, r = a, s = b, mod = m;
     r = r % mod;
     while (s > 0)

@@ -6,6 +6,7 @@
 
 #include "indexador.hpp"
 #include "leitor_termos.hpp"
+#include "msgassert.hpp"
 #include <cmath>
 #include <sstream>
 #include <filesystem>
@@ -42,6 +43,7 @@ void Indexador::cria_doc_data(Doc_Data &doc_data, Indice_Termos &indice)
 // Entrada: estrutura a preencher e tabela de hash a usar.
 // Saida: doc_data eh preenchido.
 {
+    erroAssert(doc_data.size() == this->ndocs, "Quantidade de arquivos a ser preenchido diferente da quantidade real");
     int i = 0;
     std::filesystem::path caminho(this->corpus);
     for (const std::filesystem::directory_entry &dir_entry :
@@ -94,6 +96,7 @@ void Indexador::cria_indice(Indice_Termos &ans)
 // Entrada: estrutura a preencher.
 // Saida: o indice ans eh preenchido.
 {
+    erroAssert(ans.get_tamanho_usado() > 0, "Indice ja criado, tentativa de criar de novo.");
     std::filesystem::path caminho(this->corpus);
 
     for (const std::filesystem::directory_entry &dir_entry :
@@ -111,8 +114,6 @@ void Indexador::arq_pra_set(std::string caminho, String_Set &ans, String_Set &pr
 // Entrada: caminho pro arquivo, estrutura a preencher e estrutura com os termos proibidos.
 // Saida: o conjunto ans eh preenchido.
 {
-    std::ifstream arq(caminho);
-
     Leitor_Termos lei(caminho, &proibidos);
     while (true)
     {

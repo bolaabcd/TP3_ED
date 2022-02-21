@@ -8,6 +8,7 @@
 #include "ranking_documentos.hpp"
 #include "indice_termos.hpp"
 #include "leitor_termos.hpp"
+#include "msgassert.hpp"
 #include <string>
 #include <cmath>
 
@@ -27,6 +28,7 @@ void Processador_Consultas::consultar(
 // Entrada: indice reverso, arquivo de consulta, palavras proibidas, Wds pre-calculados e rank (inicialmente vazio).
 // Saida: preenche o rank, ja ordenado, com a relevancia de cada documento para a consulta em questao.
 {
+    erroAssert(doc_data.size() == rank.size(), "Devemos ter tantos arquivos a rankear quanto arquivos encontrados.");
     for (int j = 0; j < doc_data.size(); j++)
     {
         rank.set_id(j, doc_data.get_id(j));

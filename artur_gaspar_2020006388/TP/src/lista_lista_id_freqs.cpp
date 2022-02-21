@@ -5,6 +5,7 @@
 //---------------------------------------------------------------------
 
 #include "lista_lista_id_freqs.hpp"
+#include "msgassert.hpp"
 
 Lista_ID_Freqs_Node::Lista_ID_Freqs_Node() : proximo(nullptr) 
 // Descricao: inicializa um no de lista de ID_Freqs.
@@ -60,6 +61,7 @@ void Lista_Lista_ID_Freqs::add_certo(std::string termo, int iddoc)
 // Entrada: termo associado e id do documento.
 // Saida: nada.
 {
+    erroAssert(iddoc >= 0, "IDs de arquivo negativos nao sao permitidos.");
     Lista_ID_Freqs_Node *ifn = this->no_frontal;
     ID_Freq val(iddoc, 1);
     if (ifn == nullptr)

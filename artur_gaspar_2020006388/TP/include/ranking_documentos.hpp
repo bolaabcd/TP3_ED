@@ -17,6 +17,7 @@ public:
     void set_val(int pos, double val);
     void set_id(int pos, int id);
     int get_id(int pos);
+    int size();
     double get_val(int pos);
     void ordena();
     ~Ranking_Documentos();

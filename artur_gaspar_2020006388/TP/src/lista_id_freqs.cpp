@@ -50,6 +50,8 @@ int Lista_ID_Freqs::get_freq(int id)
 // Entrada: id usado pra achar a frequencia.
 // Saida: frequencia associada, 0 se nao esta presente.
 {
+    erroAssert(id >= 0, "IDs de arquivo negativos nao sao permitidos.");
+
     ID_Freq_Node *ifn = this->no_frontal;
     if (ifn == nullptr)
     {
@@ -75,6 +77,8 @@ void Lista_ID_Freqs::add(ID_Freq id_freq)
 // Entrada: id e frequencia, na forma de ID_Freq.
 // Saida: nada.
 {
+    erroAssert(id_freq.id >= 0 && id_freq.freq >= 0, "IDs e frequencias nao podem ser negativos.");
+
     ID_Freq_Node *ifn = this->no_frontal;
     if (ifn == nullptr)
     {

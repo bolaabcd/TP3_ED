@@ -13,6 +13,7 @@ Ranking_Documentos::Ranking_Documentos(int tam)
 // Entrada: tamanho do ranking.
 // Saida: objeto inicializado.
 {
+    erroAssert(tam >= 0, "Quantidade de documentos negativa nao e permitido.");
     this->tamanho = tam;
     this->ids = new int[tam];
     this->vals = new double[tam];
@@ -23,8 +24,10 @@ void Ranking_Documentos::imprimir(std::string out_nome, int num_posicoes)
 // Entrada: arquivo de saida e numero de posicoes a imprimir.
 // Saida: escreve no arquivo as num_posicoes primeiras posicoes.
 {
-    std::ofstream out(out_nome);
     avisoAssert(num_posicoes <= this->tamanho, "Menos que 10 documentos, imprimindo rank com a quantidade presente de documentos.");
+
+    std::ofstream out(out_nome);
+    erroAssert(!out.fail(), "Nao foi possivel abrir arquivo em que o ranking deve ser impresso.");
     for (int i = 0; i < num_posicoes && i < this->tamanho; i++)
     {
         if (this->vals[i] <= 0)
@@ -40,6 +43,8 @@ void Ranking_Documentos::set_val(int pos, double val)
 // Entrada: posicao do arquivo cuja relevancia sera setada e o valor da relevancia.
 // Saida: nada.
 {
+    erroAssert(pos < tamanho && pos >= 0, "Tentativa de acessar posicao invalida do ranking de documentos.");
+
     this->vals[pos] = val;
 }
 
@@ -49,7 +54,8 @@ void Ranking_Documentos::set_id(int pos, int id)
 // Saida: nada.
 {
     erroAssert(this->ids != nullptr, "Lista de ids inexistente.");
-    erroAssert(pos < tamanho && pos >= 0, "Tentativa de acessar posicao invalida.");
+    erroAssert(pos < tamanho && pos >= 0, "Tentativa de acessar posicao invalida do ranking de documentos.");
+
     this->ids[pos] = id;
 }
 
@@ -58,6 +64,8 @@ int Ranking_Documentos::get_id(int pos)
 // Entrada: posicao.
 // Saida: id.
 {
+    erroAssert(pos < tamanho && pos >= 0, "Tentativa de acessar posicao invalida do ranking de documentos.");
+
     return this->ids[pos];
 }
 
@@ -66,6 +74,8 @@ double Ranking_Documentos::get_val(int pos)
 // Entrada: posicao.
 // Saida: relevancia.
 {
+    erroAssert(pos < tamanho && pos >= 0, "Tentativa de acessar posicao invalida do ranking de documentos.");
+
     return this->vals[pos];
 }
 
@@ -139,6 +149,14 @@ void Ranking_Documentos::quicksort_interno(int l, int r)
 
     quicksort_interno(l, j);
     quicksort_interno(i, r);
+}
+
+int Ranking_Documentos::size() 
+// Descricao: informa a quantidade de documentos rankeados.
+// Entrada: nada.
+// Saida: quantidade de documentos no rank.
+{
+    return this->tamanho;
 }
 
 Ranking_Documentos::~Ranking_Documentos()
