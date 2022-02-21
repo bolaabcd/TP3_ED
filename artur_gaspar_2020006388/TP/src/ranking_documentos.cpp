@@ -24,18 +24,21 @@ void Ranking_Documentos::imprimir(std::string out_nome, int num_posicoes)
 // Entrada: arquivo de saida e numero de posicoes a imprimir.
 // Saida: escreve no arquivo as num_posicoes primeiras posicoes.
 {
-    avisoAssert(num_posicoes <= this->tamanho, "Menos que 10 documentos, imprimindo rank com a quantidade presente de documentos.");
-
     std::ofstream out(out_nome);
     erroAssert(!out.fail(), "Nao foi possivel abrir arquivo em que o ranking deve ser impresso.");
+    int amt = 0;
     for (int i = 0; i < num_posicoes && i < this->tamanho; i++)
     {
         if (this->vals[i] <= 0)
             break;
         out << this->ids[i] << " ";
+        amt++;
     }
     out << std::endl;
     out.close();
+    if(amt < num_posicoes)
+        avisoAssert(num_posicoes <= this->tamanho, "Menos documentos que a quantidade desejada possui algum termo da busca, imprimindo rank com a quantidade de documentos que efetivamente possuem o termo.");
+
 }
 
 void Ranking_Documentos::set_val(int pos, double val)
