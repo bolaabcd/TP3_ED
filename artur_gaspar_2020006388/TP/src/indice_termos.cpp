@@ -14,7 +14,7 @@ Indice_Termos::Indice_Termos(String_Hasher hsher, int tamanho_inicial)
 {
     this->hasher = hsher;
     this->make_primos();
-    this->tamanho_atual = this->get_next_tamanho(tamanho_inicial);
+    this->tamanho_atual = this->get_next_tamanho(2*tamanho_inicial);
     this->mapa = new Lista_Lista_ID_Freqs[this->tamanho_atual];
 }
 
@@ -103,6 +103,17 @@ int Indice_Termos::getiddoc(std::string nome)
     for (int i = numrev.size() - 1; i >= 0; i--)
         num.push_back(numrev[i]);
     return atoi(num.c_str());
+}
+
+int Indice_Termos::get_tamanho_usado()
+{
+    int ans = 0;
+    for (int i = 0; i < this->tamanho_atual; i++)
+    {
+        if (this->mapa[i].get_tamanho() > 0)
+            ans++;
+    }
+    return ans;
 }
 
 Indice_Termos::~Indice_Termos()

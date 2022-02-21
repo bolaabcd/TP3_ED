@@ -103,7 +103,7 @@ bool Leitor_Termos::char_ruim(char c)
 
 void Leitor_Termos::to_lowercase(std::string &palavra)
 {
-    for (int i = 0; i < palavra.length(); i++)
+    for (int i = 0; i < (int)palavra.length(); i++)
         if (palavra[i] >= 'A' && palavra[i] <= 'Z')
             palavra[i] = palavra[i] - 'A' + 'a';
 }

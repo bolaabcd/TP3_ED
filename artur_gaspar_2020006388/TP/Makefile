@@ -15,9 +15,10 @@ SRC_FOLDER = ./src/
 
 # Opções do compilador
 CC = g++
-CFLAGS = -Wall -c -I$(INCLUDE_FOLDER) -fsanitize=address,undefined -fno-omit-frame-pointer -Wshadow -std=c++17 -Wno-unused-result -Wno-sign-compare -Wno-char-subscripts -g
-LFLAGS = -Wall -fsanitize=address,undefined -fno-omit-frame-pointer -Wshadow -std=c++17 -Wno-unused-result -Wno-sign-compare -Wno-char-subscripts -g
-LIBS = -lm
+DBGCFLAGS = -fsanitize=address,undefined -fno-omit-frame-pointer -Wshadow -Wno-unused-result -Wno-sign-compare -Wno-char-subscripts -g
+DBGLFLAGS = -Wall -fsanitize=address,undefined -fno-omit-frame-pointer -Wshadow -Wno-unused-result -Wno-sign-compare -Wno-char-subscripts -g
+CFLAGS = -Wall -c -I $(INCLUDE_FOLDER) -std=c++17  $(DBGCFLAGS)
+LFLAGS = -lm -std=c++17  $(DBGLFLAGS)
 
 # Arquivos
 TARGET = $(BIN_FOLDER)/buscar
@@ -27,7 +28,7 @@ OBJ_FILES = $(OBJ_FOLDER)/buscar.o $(OBJ_FOLDER)/doc_data.o $(OBJ_FOLDER)/id_fre
 all: $(TARGET)
 
 $(TARGET): $(OBJ_FILES)
-	$(CC) -o $(TARGET) $(LFLAGS) $(LIBS) $(OBJ_FILES)
+	$(CC) -o $(TARGET) $(LFLAGS) $(OBJ_FILES)
 
 $(OBJ_FOLDER)/memlog.o: $(HDR_FILES) $(SRC_FOLDER)/memlog.cpp
 	$(CC) $(CFLAGS) -o $(OBJ_FOLDER)/memlog.o $(SRC_FOLDER)/memlog.cpp

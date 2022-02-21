@@ -72,6 +72,11 @@ void Lista_Lista_ID_Freqs::add_certo(std::string termo, int iddoc)
     this->tamanho++;
 }
 
+int Lista_Lista_ID_Freqs::get_tamanho()
+{
+    return this->tamanho;
+}
+
 Lista_Lista_ID_Freqs::~Lista_Lista_ID_Freqs()
 {
     if (this->no_frontal != nullptr)

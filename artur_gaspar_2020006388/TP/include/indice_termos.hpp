@@ -23,6 +23,7 @@ public:
         std::string documento,
         String_Set &stopw);
     int getiddoc(std::string nome);
+    int get_tamanho_usado();
     ~Indice_Termos();
 
 private:

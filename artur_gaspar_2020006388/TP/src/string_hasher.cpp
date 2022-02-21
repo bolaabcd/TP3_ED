@@ -16,7 +16,7 @@ int String_Hasher::get_hash(std::string str, int tamanho)
 {
     long long ans = 0;
 
-    for (int i = 0; i < str.length(); i++)
+    for (int i = 0; i < (int)str.length(); i++)
     {
         ans = ((long long)ans +
                (long long)(str[i] - 'a') *

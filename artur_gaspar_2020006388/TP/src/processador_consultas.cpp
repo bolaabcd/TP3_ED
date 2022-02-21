@@ -40,7 +40,7 @@ void Processador_Consultas::consultar(
         {
             double ftd = lista->get_freq(doc_data.get_id(j));
             double wij = ftd * idf;
-            double wiq = ftd > 0 ? 1 : 0;
+            double wiq = 1;
             rank.set_val(j, rank.get_val(j) + wij * wiq);
         }
     }

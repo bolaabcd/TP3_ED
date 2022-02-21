@@ -20,9 +20,9 @@ std::string reg_nome, querry_nome, out_nome, corpus_nome, stop_nome;
 int regmem;
 
 void uso()
-// Descricao: imprime as opcoes de uso
-// Entrada: nao tem
-// Saida: impressao das opcoes de linha de comando
+// Descricao: imprime as opcoes de uso.
+// Entrada: nao tem.
+// Saida: impressao das opcoes de linha de comando.
 {
     fprintf(stderr, "buscar\n");
     fprintf(stderr, "\t-h      \t(obter ajuda) \n");
@@ -35,9 +35,9 @@ void uso()
 }
 
 void parse_args(int argc, char **argv)
-// Descricao: le as opcoes da linha de comando e inicializa variaveis
-// Entrada: argc e argv
-// Saida: reg_nome, querry_nome, out_nome, corpus_nome, stop_nome, regmem
+// Descricao: le as opcoes da linha de comando e inicializa variaveis.
+// Entrada: argc e argv.
+// Saida: reg_nome, querry_nome, out_nome, corpus_nome, stop_nome, regmem.
 {
     // tratando caso de nao ter argumentos
     if (argc == 1)
@@ -116,9 +116,9 @@ void parse_args(int argc, char **argv)
 }
 
 int main(int argc, char **argv)
-// Descricao: programa principal para indexacao e busca de documentos
-// Entrada: argc e argv
-// Saida: no arquivo especificado escreve os 10 melhores documentos pra busca dada
+// Descricao: programa principal para indexacao e busca de documentos.
+// Entrada: argc e argv.
+// Saida: no arquivo especificado escreve os 10 melhores documentos pra busca dada.
 {
     // avaliar linha de comando
     parse_args(argc, argv);
@@ -145,7 +145,9 @@ int main(int argc, char **argv)
     Ranking_Documentos ran(amtdocs);
     pcs.consultar(iter, querry_nome, stopw, doc_data, ran);
 
-    ran.imprimir(out_nome, 10);
+    int tamano = iter.get_tamanho_usado();
+    if(tamano > 0 || tamano <= 0)
+        ran.imprimir(out_nome, 10);
 
     // conclui registro de acesso
     return finalizaMemLog();

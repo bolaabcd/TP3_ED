@@ -26,6 +26,7 @@ public:
     Lista_Lista_ID_Freqs();
     Lista_ID_Freqs *get_certo(std::string termo);
     void add_certo(std::string termo, int iddoc);
+    int get_tamanho();
     ~Lista_Lista_ID_Freqs();
 
 private:
