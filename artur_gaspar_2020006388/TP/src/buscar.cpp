@@ -131,7 +131,7 @@ int main(int argc, char **argv)
 
     Indexador ind(corpus_nome, stop_nome);
 
-    int amttermos = ind.quantos_termos(corpus_nome);
+    int amttermos = ind.quantos_termos();
     int amtdocs = ind.quantos_docs();
     Indice_Termos iter(String_Hasher(), amttermos);
     ind.cria_indice(iter);

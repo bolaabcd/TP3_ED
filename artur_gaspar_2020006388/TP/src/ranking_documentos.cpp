@@ -9,6 +9,9 @@
 #include <fstream>
 
 Ranking_Documentos::Ranking_Documentos(int tam)
+// Descricao: inicializa um ranking de documentos vazio.
+// Entrada: tamanho do ranking.
+// Saida: objeto inicializado.
 {
     this->tamanho = tam;
     this->ids = new int[tam];
@@ -16,6 +19,9 @@ Ranking_Documentos::Ranking_Documentos(int tam)
 }
 
 void Ranking_Documentos::imprimir(std::string out_nome, int num_posicoes)
+// Descricao: imprime os ids dos documentos mais relevantes.
+// Entrada: arquivo de saida e numero de posicoes a imprimir.
+// Saida: escreve no arquivo as num_posicoes primeiras posicoes.
 {
     std::ofstream out(out_nome);
     avisoAssert(num_posicoes <= this->tamanho, "Menos que 10 documentos, imprimindo rank com a quantidade presente de documentos.");
@@ -30,11 +36,17 @@ void Ranking_Documentos::imprimir(std::string out_nome, int num_posicoes)
 }
 
 void Ranking_Documentos::set_val(int pos, double val)
+// Descricao: seta a relevancia de um arquivo.
+// Entrada: posicao do arquivo cuja relevancia sera setada e o valor da relevancia.
+// Saida: nada.
 {
     this->vals[pos] = val;
 }
 
 void Ranking_Documentos::set_id(int pos, int id)
+// Descricao: seta o id de um arquivo.
+// Entrada: posicao do arquivo cujo id sera setado e o valor do id.
+// Saida: nada.
 {
     erroAssert(this->ids != nullptr, "Lista de ids inexistente.");
     erroAssert(pos < tamanho && pos >= 0, "Tentativa de acessar posicao invalida.");
@@ -42,21 +54,33 @@ void Ranking_Documentos::set_id(int pos, int id)
 }
 
 int Ranking_Documentos::get_id(int pos)
+// Descricao: retorna id do documento na posicao.
+// Entrada: posicao.
+// Saida: id.
 {
     return this->ids[pos];
 }
 
 double Ranking_Documentos::get_val(int pos)
+// Descricao: retorna a relevancia do documento na posicao.
+// Entrada: posicao.
+// Saida: relevancia.
 {
     return this->vals[pos];
 }
 
 void Ranking_Documentos::ordena()
+// Descricao: ordena o ranking por relevancia, e se a relevancia for igual coloca o com menor id primeiro.
+// Entrada: nada.
+// Saida: nada.
 {
     this->quicksort_interno(0, this->tamanho - 1);
 }
 
 bool Ranking_Documentos::menor_aux(int l, int r)
+// Descricao: compara os elementos das posicoes l e r.
+// Entrada: posicoes l e r.
+// Saida: verdadeiro se l deve vir depois de r, falso caso contrario.
 {
     if (this->vals[l] == this->vals[r])
         return this->ids[l] > this->ids[r];
@@ -65,6 +89,9 @@ bool Ranking_Documentos::menor_aux(int l, int r)
 }
 
 void Ranking_Documentos::quicksort_interno(int l, int r)
+// Descricao: metodo auxiliar recursivo usado pra ordenacao.
+// Entrada: intervalo ordenado no momento.
+// Saida: nada.
 {
     if (l >= r)
         return;
@@ -115,6 +142,9 @@ void Ranking_Documentos::quicksort_interno(int l, int r)
 }
 
 Ranking_Documentos::~Ranking_Documentos()
+// Descricao: destrutor padrao do tipo.
+// Entrada: nada.
+// Saida: libera a memoria alocada no construtor.
 {
     delete[] this->ids;
     delete[] this->vals;

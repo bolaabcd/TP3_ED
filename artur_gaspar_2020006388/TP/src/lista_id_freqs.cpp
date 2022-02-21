@@ -8,9 +8,16 @@
 #include "msgassert.hpp"
 #include "memlog.hpp"
 
-ID_Freq_Node::ID_Freq_Node(ID_Freq ifr) : id_freq(ifr), proximo(nullptr) {}
+ID_Freq_Node::ID_Freq_Node(ID_Freq ifr) : id_freq(ifr), proximo(nullptr) 
+// Descricao: inicializa um noh de ID_Freq.
+// Entrada: ID_Freq do noh.
+// Saida: objeto instanciado.
+{}
 
 ID_Freq_Node::~ID_Freq_Node()
+// Descricao: destrutor padrao do tipo, limpa a memoria alocada recursivamente.
+// Entrada: nada.
+// Saida: nada.
 {
     if (this->proximo == nullptr)
         return;
@@ -22,17 +29,26 @@ ID_Freq_Node::~ID_Freq_Node()
 }
 
 Lista_ID_Freqs::Lista_ID_Freqs()
+// Descricao: inicializa uma lista de ID_Freqs.
+// Entrada: nada.
+// Saida: objeto inicializado.
 {
     this->tamanho = 0;
     this->no_frontal = nullptr;
 }
 
 ID_Freq_Node *Lista_ID_Freqs::get_front()
+// Descricao: indica como chegar no primeiro noh da lista.
+// Entrada: nada.
+// Saida: ponteiro para o primeiro no da lista.
 {
     return this->no_frontal;
 }
 
 int Lista_ID_Freqs::get_freq(int id)
+// Descricao: retorna a frequencia salva no noh com id especificado.
+// Entrada: id usado pra achar a frequencia.
+// Saida: frequencia associada, 0 se nao esta presente.
 {
     ID_Freq_Node *ifn = this->no_frontal;
     if (ifn == nullptr)
@@ -55,6 +71,9 @@ int Lista_ID_Freqs::get_freq(int id)
 }
 
 void Lista_ID_Freqs::add(ID_Freq id_freq)
+// Descricao: adiciona a frequencia passada como argumento no id passado como argumento, ou o cria se nao existia ainda.
+// Entrada: id e frequencia, na forma de ID_Freq.
+// Saida: nada.
 {
     ID_Freq_Node *ifn = this->no_frontal;
     if (ifn == nullptr)
@@ -78,11 +97,17 @@ void Lista_ID_Freqs::add(ID_Freq id_freq)
 }
 
 int Lista_ID_Freqs::size()
+// Descricao: informa o tamanho da lista.
+// Entrada: nada.
+// Saida: quantidade de nos atualmente na lista.
 {
     return this->tamanho;
 }
 
 Lista_ID_Freqs::~Lista_ID_Freqs()
+// Descricao: destrutor padrao da lista de ID_Freqs.
+// Entrada: nada.
+// Saida: nada.
 {
     if (this->no_frontal != nullptr)
     {

@@ -11,7 +11,11 @@
 #include <string>
 #include <cmath>
 
-Processador_Consultas::Processador_Consultas() {}
+Processador_Consultas::Processador_Consultas() 
+// Descricao: inicializa um processador de consultas.
+// Entrada: nada.
+// Saida: objeto inicializado.
+{}
 
 void Processador_Consultas::consultar(
     Indice_Termos &indice,
@@ -19,6 +23,9 @@ void Processador_Consultas::consultar(
     String_Set &stopw,
     Doc_Data &doc_data,
     Ranking_Documentos &rank)
+// Descricao: realiza uma consulta.
+// Entrada: indice reverso, arquivo de consulta, palavras proibidas, Wds pre-calculados e rank (inicialmente vazio).
+// Saida: preenche o rank, ja ordenado, com a relevancia de cada documento para a consulta em questao.
 {
     for (int j = 0; j < doc_data.size(); j++)
     {

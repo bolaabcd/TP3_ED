@@ -11,6 +11,9 @@
 #include <sstream>
 
 Indice_Termos::Indice_Termos(String_Hasher hsher, int tamanho_inicial)
+// Descricao: inicializa um indice reverso com um tamanho inicial e todas entradas vazias.
+// Entrada: hash a utilizar e tamanho inicial (que na verdade nao muda durante a execucao do programa).
+// Saida: objeto inicializado.
 {
     this->hasher = hsher;
     this->make_primos();
@@ -19,6 +22,9 @@ Indice_Termos::Indice_Termos(String_Hasher hsher, int tamanho_inicial)
 }
 
 Lista_ID_Freqs *Indice_Termos::get_lista_id_freqs(std::string termo)
+// Descricao: retorna a lista de ids e frequencias associadas ao termo passado como argumento.
+// Entrada: termo cuja lista sera retornada.
+// Saida: apontador pra lista correspondente ao termo, ou um apontador nulo se ele nao estiver presente no corpus.
 {
     return this->mapa[this->hasher.get_hash(termo, this->tamanho_atual)].get_certo(termo);
 }
@@ -27,6 +33,9 @@ void Indice_Termos::add_documento(
     std::string corpus,
     std::string documento,
     String_Set &stopw)
+// Descricao: adiciona todos os termos de um documento ao indice.
+// Entrada: caminhos para o corpus e para o documento a ser adicionado, e conjunto de palavras a ignorar.
+// Saida: nada.
 {
     int iddoc = this->getiddoc(documento);
 
@@ -43,6 +52,9 @@ void Indice_Termos::add_documento(
 }
 
 void Indice_Termos::make_primos()
+// Descricao: cria a lista dos 26 tamamnhos primos que o nosso programa pode utilizar.
+// Entrada: nada.
+// Saida: nada.
 {
     // Gerado externamente
     this->tamanhos_primos_validos = new int[26]{
@@ -76,6 +88,9 @@ void Indice_Termos::make_primos()
 }
 
 int Indice_Termos::get_next_tamanho(int tam)
+// Descricao: obtem o primeiro tamanho valido maior que o passado como argumento.
+// Entrada: tamanho cujo primeiro primo maior sera encontrado.
+// Saida: primeiro primo da lista maior que a entrada.
 {
     for (int i = 0; i < 26; i++)
         if (this->tamanhos_primos_validos[i] > tam)
@@ -84,6 +99,9 @@ int Indice_Termos::get_next_tamanho(int tam)
 }
 
 int Indice_Termos::getiddoc(std::string nome)
+// Descricao: obtem o id de um documento a partir de seu nome.
+// Entrada: nome do documento, que deve ser seu id seguido de .txt ou outro formato de extensao.
+// Saida: id do documento.
 {
     std::string numrev;
     bool iniciou = false;
@@ -106,6 +124,9 @@ int Indice_Termos::getiddoc(std::string nome)
 }
 
 int Indice_Termos::get_tamanho_usado()
+// Descricao: informa, para fins de depuracao, a quantidade de entradas na tabela de hash efetivamente usada.
+// Entrada: nada.
+// Saida: quantidade de entradas da tabela efetivamente usadas.
 {
     int ans = 0;
     for (int i = 0; i < this->tamanho_atual; i++)
@@ -117,7 +138,12 @@ int Indice_Termos::get_tamanho_usado()
 }
 
 Indice_Termos::~Indice_Termos()
+// Descricao: destrutor padrao do indice, que limpa a memoria alocada pelo mesmo.
+// Entrada: nada.
+// Saida: nada.
 {
-    delete[] this->mapa;
-    delete[] this->tamanhos_primos_validos;
+    if(this->mapa != nullptr)
+        delete[] this->mapa;
+    if(this->tamanhos_primos_validos != nullptr)
+        delete[] this->tamanhos_primos_validos;
 }

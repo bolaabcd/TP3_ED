@@ -12,6 +12,9 @@
 #include <string>
 
 Indexador::Indexador(std::string corpus_path, std::string stopwords_path)
+// Descricao: inicializa um Indexador.
+// Entrada: caminhos para o corpus e para as stopwords.
+// Saida: objeto inicializado.
 {
     this->corpus = corpus_path;
     this->stopwords = stopwords_path;
@@ -35,6 +38,9 @@ Indexador::Indexador(std::string corpus_path, std::string stopwords_path)
 }
 
 void Indexador::cria_doc_data(Doc_Data &doc_data, Indice_Termos &indice)
+// Descricao: preenche os Wds dos arquivos do corpus.
+// Entrada: estrutura a preencher e tabela de hash a usar.
+// Saida: doc_data eh preenchido.
 {
     int i = 0;
     std::filesystem::path caminho(this->corpus);
@@ -68,16 +74,25 @@ void Indexador::cria_doc_data(Doc_Data &doc_data, Indice_Termos &indice)
 }
 
 int Indexador::quantos_docs()
+// Descricao: informa quantos documentos temos no total.
+// Entrada: nada.
+// Saida: quantidade de documentos no corpus.
 {
-    return ndocs;
+    return this->ndocs;
 }
 
 String_Set &Indexador::get_stopw()
+// Descricao: retorna, por referencia, o conjunto de stopwords.
+// Entrada: nada.
+// Saida: conjunto com todas stopwords.
 {
     return this->stopw;
 }
 
 void Indexador::cria_indice(Indice_Termos &ans)
+// Descricao: preenche o indice reverso de termos.
+// Entrada: estrutura a preencher.
+// Saida: o indice ans eh preenchido.
 {
     std::filesystem::path caminho(this->corpus);
 
@@ -92,6 +107,9 @@ void Indexador::cria_indice(Indice_Termos &ans)
 }
 
 void Indexador::arq_pra_set(std::string caminho, String_Set &ans, String_Set &proibidos)
+// Descricao: preenche um conjunto com os termos de um arquivo.
+// Entrada: caminho pro arquivo, estrutura a preencher e estrutura com os termos proibidos.
+// Saida: o conjunto ans eh preenchido.
 {
     std::ifstream arq(caminho);
 
@@ -105,7 +123,10 @@ void Indexador::arq_pra_set(std::string caminho, String_Set &ans, String_Set &pr
     }
 }
 
-int Indexador::quantos_termos(std::string corpus_path)
+int Indexador::quantos_termos()
+// Descricao: informa quantos termos distintos temos no total no corpus.
+// Entrada: caminho para o corpus.
+// Saida: inicializa ids, Wds e tamanho.
 {
     return this->termos.size();
 }
