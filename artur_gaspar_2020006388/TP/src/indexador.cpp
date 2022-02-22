@@ -96,7 +96,7 @@ void Indexador::cria_indice(Indice_Termos &ans)
 // Entrada: estrutura a preencher.
 // Saida: o indice ans eh preenchido.
 {
-    erroAssert(ans.get_tamanho_usado() > 0, "Indice ja criado, tentativa de criar de novo.");
+    erroAssert(ans.get_tamanho_usado() == 0, "Indice ja criado, tentativa de criar de novo.");
     std::filesystem::path caminho(this->corpus);
 
     for (const std::filesystem::directory_entry &dir_entry :

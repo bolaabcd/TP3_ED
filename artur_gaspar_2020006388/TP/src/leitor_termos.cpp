@@ -14,10 +14,11 @@ Leitor_Termos::Leitor_Termos(std::string cam_arquivo, String_Set *proib)
 // Entrada: caminho do arquivo do qual vamos ler e apontador prum conjunto de palavras proibidas.
 // Saida: objeto instanciado.
 {
-    erroAssert(proib = nullptr, "Apontador pro conjunto de termos proibidos nao pode ser nulo");
+    erroAssert(proib != nullptr, "Apontador pro conjunto de termos proibidos nao pode ser nulo");
 
     this->arq = std::ifstream(cam_arquivo);
-    erroAssert(!this->arq.fail(), "Nao foi possivel abrir o arquivo '" + cam_arquivo + "'.");
+    std::string errostr = "Nao foi possivel abrir o arquivo '" + cam_arquivo + "'.";
+    erroAssert(!this->arq.fail(), errostr.c_str());
     
     this->proibidos = proib;
 }
