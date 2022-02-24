@@ -12,7 +12,9 @@ ID_Freq_Node::ID_Freq_Node(ID_Freq ifr) : id_freq(ifr), proximo(nullptr)
 // Descricao: inicializa um noh de ID_Freq.
 // Entrada: ID_Freq do noh.
 // Saida: objeto instanciado.
-{}
+{
+    escreveMemLog((long int)&this->id_freq, sizeof(ID_Freq), 0);
+}
 
 ID_Freq_Node::~ID_Freq_Node()
 // Descricao: destrutor padrao do tipo, limpa a memoria alocada recursivamente.
@@ -51,7 +53,6 @@ int Lista_ID_Freqs::get_freq(int id)
 // Saida: frequencia associada, 0 se nao esta presente.
 {
     erroAssert(id >= 0, "IDs de arquivo negativos nao sao permitidos.");
-
     ID_Freq_Node *ifn = this->no_frontal;
     if (ifn == nullptr)
     {
@@ -59,11 +60,15 @@ int Lista_ID_Freqs::get_freq(int id)
     }
     else
     {
-        while (ifn->proximo != nullptr && ifn->id_freq.id != id)
+        leMemLog((long int)&ifn->id_freq, sizeof(ID_Freq), 0);
+        while (ifn->proximo != nullptr && ifn->id_freq.id != id){
+            leMemLog((long int)&ifn->proximo->id_freq, sizeof(ID_Freq), 0);
             ifn = ifn->proximo;
+        }
 
         if (ifn->id_freq.id == id)
         {
+            leMemLog((long int)&ifn->id_freq, sizeof(ID_Freq), 0);
             return ifn->id_freq.freq;
         }
         else
@@ -86,11 +91,15 @@ void Lista_ID_Freqs::add(ID_Freq id_freq)
     }
     else
     {
-        while (ifn->proximo != nullptr && ifn->id_freq.id != id_freq.id)
+        leMemLog((long int)&ifn->id_freq, sizeof(ID_Freq), 0);
+        while (ifn->proximo != nullptr && ifn->id_freq.id != id_freq.id){
+            leMemLog((long int)&ifn->proximo->id_freq, sizeof(ID_Freq), 0);
             ifn = ifn->proximo;
+        }
 
         if (ifn->id_freq.id == id_freq.id)
         {
+            leMemLog((long int)&ifn->id_freq, sizeof(ID_Freq), 0);
             ifn->id_freq.freq += id_freq.freq;
             this->tamanho--;
         }

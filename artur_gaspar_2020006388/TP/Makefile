@@ -17,8 +17,8 @@ SRC_FOLDER = ./src/
 CC = g++
 DBGCFLAGS = -fsanitize=address,undefined -fno-omit-frame-pointer -Wshadow -Wno-unused-result -Wno-sign-compare -Wno-char-subscripts -g
 DBGLFLAGS = -Wall -fsanitize=address,undefined -fno-omit-frame-pointer -Wshadow -Wno-unused-result -Wno-sign-compare -Wno-char-subscripts -g
-CFLAGS = -Wall -c -I $(INCLUDE_FOLDER) -std=c++17  $(DBGCFLAGS)
-LFLAGS = -lm -std=c++17  $(DBGLFLAGS)
+CFLAGS = -Wall -c -I $(INCLUDE_FOLDER) -std=c++17 # $(DBGCFLAGS)
+LFLAGS = -lm -std=c++17 # $(DBGLFLAGS)
 
 # Arquivos
 TARGET = $(BIN_FOLDER)/buscar

@@ -129,6 +129,8 @@ int main(int argc, char **argv)
     // ativar registro de acesso
     ativaMemLog();
 
+    std::cout << "Iniciando criacao do indice (pode demorar um bocado, com -l pode demorar minutos)" << std::endl;
+
     Indexador ind(corpus_nome, stop_nome);
 
     int amttermos = ind.quantos_termos();
@@ -136,6 +138,8 @@ int main(int argc, char **argv)
     Indice_Termos iter(String_Hasher(), amttermos);
     ind.cria_indice(iter);
 
+
+    std::cout << "Iniciando processamento da consulta (pode demorar mais um bocado, com -l pode demorar minutos)" << std::endl;
     Processador_Consultas pcs;
 
     String_Set &stopw = ind.get_stopw();
@@ -144,6 +148,8 @@ int main(int argc, char **argv)
 
     Ranking_Documentos ran(amtdocs);
     pcs.consultar(iter, querry_nome, stopw, doc_data, ran);
+
+    std::cout << "Ordenando ranks e pegando 10 maiores (nao deve demorar muito)" << std::endl << std::endl;
 
     int tamano = iter.get_tamanho_usado();
     if(tamano > 0 || tamano <= 0)

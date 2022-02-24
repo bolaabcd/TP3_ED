@@ -6,6 +6,7 @@
 
 #include "id_freq.hpp"
 #include "msgassert.hpp"
+#include "memlog.hpp"
 
 ID_Freq::ID_Freq(int ID, int fr) : id(ID), freq(fr)
 // Descricao: inicializa um ID_Freq com os valores passados.
@@ -27,6 +28,8 @@ bool ID_Freq::operator<(ID_Freq &outro)
 // Entrada: outro objeto a comparar com esse.
 // Saida: true se o atual eh menor, false caso contrario.
 {
+    leMemLog((long int)this, sizeof(ID_Freq), 0);
+    leMemLog((long int)&outro, sizeof(ID_Freq), 0);
     if (this->freq == outro.freq)
         return this->id < outro.id;
     else
